@@ -107,10 +107,6 @@
 (setq-default tab-width 2
               indent-tabs-mode nil
               tab-always-indent 'complete)
-;; better scrolling
-(setq scroll-margin 0
-      scroll-conservatively 100000
-      scroll-preserve-screen-position 1)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -137,13 +133,6 @@
 
 ;; Restrict to 80 chars/line
 (setq-default fill-column 80)
-
-;;;; flyspell-mode:
-;; (setq ispell-program-name (executable-find "hunspell"))
-;; (ispell-change-dictionary "den_US" t)
-;; (add-hook 'text-mode-hook 'flyspell-mode)
-;; (add-hook 'prog-mode-hook 'flyspell-prog-mode)
-;; (add-hook 'lisp-mode 'flyspell-mode)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
