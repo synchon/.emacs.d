@@ -31,6 +31,10 @@
 
 ;;; Code:
 
+;; Make startup faster by reducing the frequency of garbage
+;; collection. The default is 800 kilobytes. Measured in bytes.
+(setq gc-cons-threshold (* 50 1000 1000))
+
 (require 'package)
 
 ;; stop second package load and improve startup time
@@ -118,7 +122,7 @@
       ring-bell-function 'ignore       ;; inhibit bell
       sentence-end-double-space nil    ;; use single space at sentence end
       confirm-kill-emacs 'y-or-n-p     ;; quitting confirmation
-)
+      )
 
 ;; hooks
 
@@ -171,6 +175,14 @@
   ;; use shift + arrow keys to switch between visible buffers
   (windmove-default-keybindings))
 
+;; lazily move buffers
+(use-package buffer-move
+  :ensure t
+  :bind (("C-S-<up>" . buf-move-up)
+         ("C-S-<down>" . buf-move-down)
+         ("C-S-<left>" . buf-move-left)
+         ("C-S-<right>" . buf-move-right)))
+
 (use-package dired
   :config
   ;; dired - reuse current buffer by pressing 'a'
@@ -204,6 +216,7 @@
 (use-package auto-package-update
   :ensure t
   :config
+  (setq auto-package-update-prompt-before-update t)
   (setq auto-package-update-delete-old-versions t)
   (setq auto-package-update-hide-results t))
 
@@ -241,6 +254,20 @@
 ;; native package called to remove mode from modeline
 (use-package eldoc
   :delight)
+
+;; smooth scrolling
+(use-package sublimity
+  :ensure t
+  :hook (after-init . sublimity-mode)
+  :config
+  ;; scrolling configuration
+  (setq sublimity-scroll-weight 10)
+  (setq sublimity-scroll-drift-length 5))
+
+;; set window dimensions based on golden ratio
+(use-package golden-ratio
+  :ensure t
+  :hook (after-init . golden-ratio-mode))
 
 ;; useful functions
 (use-package crux
@@ -283,9 +310,10 @@
 
 ;; using flyspell with ivy
 (use-package flyspell-correct-ivy
-  :bind ("C-M-;" . flyspell-correct-wrapper)
-  :init
-  (setq flyspell-correct-interface #'flyspell-correct-ivy))
+  :after flyspell
+  :bind (:map flyspell-mode-map
+              ("C-;" . flyspell-correct-word-generic))
+  :custom (flyspell-correct-interface 'flyspell-correct-ivy))
 
 ;; better window switching
 (use-package ace-window
@@ -305,10 +333,30 @@
   (setq company-tooltip-align-annotations t)
   (setq company-tooltip-flip-when-above t))
 
+;; display fill-column
+(use-package fill-column-indicator
+  :ensure t
+  :hook (python-mode . fci-mode))
+
+;; indent guide
+(use-package indent-guide
+  :ensure t
+  :hook (python-mode . indent-guide-mode))
+
 ;; company front-end with icons
 ;; (use-package company-box
 ;;   :ensure t
 ;;   :hook (company-mode . company-box-mode))
+
+(use-package yasnippet
+  :ensure t
+  :hook (prog-mode . yas-minor-mode)
+  :config
+  (yas-reload-all))
+
+(use-package yasnippet-snippets
+  :ensure t
+  :after yasnippet)
 
 ;; search the kill-ring
 (use-package browse-kill-ring
@@ -383,11 +431,9 @@
 ;; walk through revisions of a file
 (use-package git-timemachine
   :ensure t
-  :bind (("s-g" . git-timemachine)))
+  :bind (("C-c C-g" . git-timemachine)))
 
-;; Org-mode
-
-;; better section and subsections
+;; better section and subsections for org mode
 (use-package org-bullets
   :ensure t
   :hook (org-mode . org-bullets-mode))
@@ -398,7 +444,8 @@
 
 ;; open macOS apps
 (use-package counsel-osx-app
-  :ensure t)
+  :ensure t
+  :bind (("C-x C-o" . counsel-osx-app)))
 
 ;; editorconfig
 (use-package editorconfig
@@ -410,6 +457,17 @@
   :ensure t
   :hook ((python-mode . anaconda-mode)
          (python-mode . anaconda-eldoc-mode)))
+
+;; anaconda backend for company
+(use-package company-anaconda
+  :ensure t
+  :config
+  (add-to-list 'company-backends 'company-anaconda))
+
+;; use virtualenv for python
+(use-package auto-virtualenvwrapper
+  :ensure t
+  :hook (python-mode . auto-virtualenvwrapper-activate))
 
 ;; Haskell support
 (use-package haskell-mode
@@ -453,6 +511,11 @@
   :ensure t
   :config
   (load-theme 'zenburn t))
+
+;; modeline
+(use-package mood-line
+  :ensure t
+  :hook (after-init . mood-line-mode))
 
 ;; beacon for finding cursor
 (use-package beacon
@@ -510,3 +573,6 @@
 
 ;;; init.el ends here
 (put 'dired-find-alternate-file 'disabled nil)
+
+;; Make gc pauses faster by decreasing the threshold.
+(setq gc-cons-threshold (* 2 1000 1000))
