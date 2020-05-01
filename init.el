@@ -1,6 +1,6 @@
 ;;; init.el --- Configuration file for Emacs >= 24.3
 ;;
-;; Copyright (c) 2018-2019 Synchon Mandal
+;; Copyright (c) 2018-2020 Synchon Mandal
 ;;
 ;; Author: Synchon Mandal <synchon@protonmail.com>
 ;; URL: https://github.com/synchon/emacs.d
@@ -162,7 +162,12 @@
 (use-package windmove
   :config
   ;; use shift + arrow keys to switch between visible buffers
-  (windmove-default-keybindings))
+  (windmove-default-keybindings)
+  ;; make windmove work in org mode
+  (add-hook 'org-shiftup-final-hook 'windmove-up)
+  (add-hook 'org-shiftleft-final-hook 'windmove-left)
+  (add-hook 'org-shiftdown-final-hook 'windmove-down)
+  (add-hook 'org-shiftright-final-hook 'windmove-right))
 
 ;; lazily move buffers
 (use-package buffer-move
@@ -194,6 +199,12 @@
   :config
   (setq ispell-program-name "aspell"
         ispell-extra-args '("--sug-mode=ultra")))
+
+;; org mode
+(use-package org
+  :hook ((org-mode-hook . turn-on-org-cdlatex))
+  :config
+  (setq org-list-allow-alphabetical t))
 
 ;;; third-party packages
 
