@@ -1,6 +1,6 @@
 ;;; init.el --- Configuration file for Emacs >= 24.3
 ;;
-;; Copyright (c) 2018-2020 Synchon Mandal
+;; Copyright (c) 2018-2021 Synchon Mandal
 ;;
 ;; Author: Synchon Mandal <synchon@protonmail.com>
 ;; URL: https://github.com/synchon/emacs.d
@@ -33,19 +33,23 @@
 
 ;; Make startup faster by reducing the frequency of garbage
 ;; collection. The default is 800 kilobytes. Measured in bytes.
-(setq gc-cons-threshold (* 50 1000 1000))
+;; This is set at 100 mb
+(setq gc-cons-threshold 100000000)
+
+;; Increase amount of data read from the process to 1 mb
+(setq read-process-output-max (* 1024 1024))
 
 (require 'package)
 
-;; stop second package load and improve startup time
+;; Stop second package load and improve startup time
 (setq package-enable-at-startup nil)
 
-;; add package sources
+;; Add package sources
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 (add-to-list 'package-archives '("gnu" . "https://elpa.gnu.org/packages/"))
 (package-initialize)
 
-;; setup use-package
+;; Setup use-package
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
@@ -53,65 +57,46 @@
 (eval-when-compile
   (require 'use-package))
 
-;; personal info
-(setq user-full-name "Synchon Mandal"
-      user-mail-address "synchon@protonmail.com")
+;; Personal info
+(setq user-full-name "Synchon Mandal"             ;; set full name
+      user-mail-address "synchon@protonmail.com") ;; set email address
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; basic setup
+;; Basic setup
+(setq inhibit-startup-screen t           ;; no splash screen
+      initial-scratch-message "")        ;; empty *scratch*
 
-;; no splash screen
-(setq inhibit-startup-screen t)
-;; empty *scratch*
-(setq initial-scratch-message "")
-;; no tool bar
-(tool-bar-mode -1)
-;; no horizontal toolbar
-(horizontal-scroll-bar-mode -1)
-;; no scroll bar
-(scroll-bar-mode -1)
-;; line numbers
-(global-linum-mode 1)
-;; no blinking cursor
-(blink-cursor-mode -1)
-;; font
-(set-frame-font "FuraCode Nerd Font 14")
+(tool-bar-mode -1)                       ;; no tool bar
+(horizontal-scroll-bar-mode -1)          ;; no horizontal toolbar
+(scroll-bar-mode -1 )                    ;; no scroll bar
+(global-display-line-numbers-mode 1)     ;; line numbers
+(blink-cursor-mode -1)                   ;; no blinking cursor
+(set-frame-font "IBM Plex Mono 14")      ;; font
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; modeline
-
-;; line numbers in modeline
-(line-number-mode 1)
-;; column number in modeline
-(column-number-mode 1)
-;; display time in modeline
-(display-time-mode 1)
-;; display file size in modeline
-(size-indication-mode 1)
+;; Modeline
+(line-number-mode 1)     ;; line numbers in modeline
+(column-number-mode 1)   ;; column number in modeline
+(display-time-mode 1)    ;; display time in modeline
+(size-indication-mode 1) ;; display file size in modeline
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; buffer
+;; Buffer
+(global-prettify-symbols-mode 1)           ;; prettify symbols like lambda
+(delete-selection-mode 1)                  ;; delete content while typing in marked region
+(global-auto-revert-mode 1)                ;; auto-revert buffer from file on disk
+(global-visual-line-mode 1)                ;; display visual line features like wrapping
 
-;; prettify symbols like lambda
-(global-prettify-symbols-mode 1)
-;; delete content while typing in marked region
-(delete-selection-mode 1)
-;; auto-revert buffer from file on disk
-(global-auto-revert-mode 1)
-;; display visual line features like wrapping
-(global-visual-line-mode 1)
-;; tab-related config
-(setq-default tab-width 2
-              indent-tabs-mode nil
-              tab-always-indent 'complete)
+(setq-default tab-width 2                  ;; use tab width of 2
+              indent-tabs-mode nil         ;; disable indent-tabs-mode
+              tab-always-indent 'complete) ;; complete indent while using tab
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;;; personal preferences
-
+;;; Personal preferences
 (setq create-lockfiles nil             ;; no lockfiles
       make-backup-files nil            ;; no backup files
       scroll-error-top-bottom t        ;; no error while scrolling past the window
@@ -120,19 +105,13 @@
       confirm-kill-emacs 'y-or-n-p     ;; quitting confirmation
       )
 
-;; hooks
+(fset 'list-buffers 'ibuffer) ;; use ibuffer
+(fset 'yes-or-no-p 'y-or-n-p) ;; use y/n instead of yes/no
+(setq-default fill-column 88) ;; Restrict to 88 chars/line
 
+;; Hooks
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 (add-hook 'prog-mode-hook 'electric-pair-mode)
-
-
-;; use ibuffer
-(fset 'list-buffers 'ibuffer)
-;; use y/n instead of yes/no
-(fset 'yes-or-no-p 'y-or-n-p)
-
-;; Restrict to 80 chars/line
-(setq-default fill-column 80)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -142,13 +121,15 @@
   (beacon-mode)
   :bind (("s-1" . text-scale-increase)
          ("s-2" . text-scale-decrease)))
+;; :hook ((before-save . delete-trailing-whitespace)
+;;        (prog-mode . electric-pair-mode)))
 
-;; display matching parenthesis
+;; Display matching parenthesis
 (use-package paren
   :config
   (show-paren-mode 1))
 
-;; highlight line under cursor
+;; Highlight line under cursor
 (use-package hl-line
   :config
   (global-hl-line-mode 1))
@@ -156,20 +137,17 @@
 ;; winner-mode
 (use-package winner
   :config
-  ;; use C-c <left> and C-c <right> to switch window config
-  (winner-mode 1))
+  (winner-mode 1)) ;; use C-c <left> and C-c <right> to switch window config
 
 (use-package windmove
   :config
-  ;; use shift + arrow keys to switch between visible buffers
-  (windmove-default-keybindings)
-  ;; make windmove work in org mode
-  (add-hook 'org-shiftup-final-hook 'windmove-up)
-  (add-hook 'org-shiftleft-final-hook 'windmove-left)
-  (add-hook 'org-shiftdown-final-hook 'windmove-down)
-  (add-hook 'org-shiftright-final-hook 'windmove-right))
+  (windmove-default-keybindings)                         ;; use shift + arrow keys to switch between visible buffers
+  (add-hook 'org-shiftup-final-hook 'windmove-up)        ;; make windmove-up work in org mode
+  (add-hook 'org-shiftleft-final-hook 'windmove-left)    ;; make windmove-left work in org mode
+  (add-hook 'org-shiftdown-final-hook 'windmove-down)    ;; make windmove-down work in org mode
+  (add-hook 'org-shiftright-final-hook 'windmove-right)) ;; make windmove-right work in org mode
 
-;; lazily move buffers
+;; Lazily move buffers
 (use-package buffer-move
   :ensure t
   :bind (("C-S-<up>" . buf-move-up)
@@ -189,53 +167,62 @@
   ;; current subdir, instead of the current subdir of this dired buffer
   (setq dired-dwim-target t))
 
-  ;; enable some really cool extensions like C-x C-j(dired-jump)
-  ;; (require 'dired-x))
-
-;; spell checker
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Flyspell
+;; Spell checking using flyspell
 (use-package flyspell
   :hook ((text-mode . flyspell-mode)
          (prog-mode . flyspell-prog-mode))
   :config
-  (setq ispell-program-name "aspell"
-        ispell-extra-args '("--sug-mode=ultra")))
+  (setq ispell-program-name "aspell"              ;; use `aspell` for ispell
+        ispell-extra-args '("--sug-mode=ultra"))) ;; use `ultra` mode for aspell
 
-;; org mode
+;; Using flyspell with ivy
+(use-package flyspell-correct-ivy
+  :after flyspell
+  :bind (:map flyspell-mode-map
+              ("C-;" . flyspell-correct-word-generic))
+  :custom (flyspell-correct-interface 'flyspell-correct-ivy))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Org-mode
+;; Org-mode customizations
 (use-package org
-  :hook ((org-mode-hook . turn-on-org-cdlatex))
+  :hook ((org-mode . turn-on-org-cdlatex))
   :config
   (setq org-list-allow-alphabetical t))
 
-;;; third-party packages
+;; Improved section and subsections for org-mode
+(use-package org-bullets
+  :ensure t
+  :hook (org-mode . org-bullets-mode))
 
-;; restart emacs from within emacs
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; General utilities
+;; Restart Emacs from within Emacs
 (use-package restart-emacs
   :ensure t)
 
-;; auto-package update
+;; Auto-package update
 (use-package auto-package-update
   :ensure t
   :config
-  (setq auto-package-update-prompt-before-update t)
-  (setq auto-package-update-delete-old-versions t)
-  (setq auto-package-update-hide-results t))
+  (setq auto-package-update-prompt-before-update t
+        auto-package-update-delete-old-versions t
+        auto-package-update-hide-results t))
 
-;; fancy icons
-(use-package  all-the-icons
+;; Fancy icons
+(use-package all-the-icons
   :ensure t)
 
-;; dashboard for emacs
+;; Dashboard for emacs
 (use-package dashboard
   :ensure t
   :config
   (dashboard-setup-startup-hook)
-  (setq dashboard-startup-banner 'logo)
-  (setq dashboard-set-navigator t)
-  (setq dashboard-items '((recents  . 5)
-                          (projects . 5)))
-  (setq dashboard-set-heading-icons t)
-  (setq dashboard-set-file-icons t)
-  (setq dashboard-navigator-buttons
+  (setq dashboard-startup-banner 'logo                  ;; use logo for banner
+        dashboard-set-navigator t                       ;; show navigator
+        dashboard-items '((recents . 5) (projects . 5)) ;; restrict recents and projects to 5
+        dashboard-set-heading-icons t                   ;; show icons
+        dashboard-set-file-icons t                      ;; show file icons
+        dashboard-navigator-buttons                     ;; customize navigator buttons
         ;; Format: "(icon title help action face prefix suffix)"
         `(;; line1
           ((,(all-the-icons-faicon "repeat" :height 1.0 :v-adjust 0.0)
@@ -247,29 +234,39 @@
             "Restart Emacs"
             (lambda (&rest _) (restart-emacs)))))))
 
+;; Neotree
+(use-package neotree
+  :ensure t
+  :bind (("s-`" . neotree-toggle)                                   ;; bind toggle key
+         ("C-a" . move-beginning-of-line))                          ;; respect global config
+  :config
+  (setq neo-theme (if (display-graphic-p) 'icons 'arrow)            ;; set theme
+        neo-smart-open t                                            ;; open current file in neotree
+        projectile-switch-project-action 'neotree-projectile-action ;; integrate with projectile-switch-project
+        neo-window-width 40))                                       ;; increase default neotree buffer width
+
 ;; delight
 (use-package delight
   :ensure t)
 
-;; native package called to remove mode from modeline
+;; Native package called to remove mode from modeline
 (use-package eldoc
   :delight)
 
-;; smooth scrolling
+;; Smooth scrolling
 (use-package sublimity
   :ensure t
   :hook (after-init . sublimity-mode)
   :config
-  ;; scrolling configuration
-  (setq sublimity-scroll-weight 10)
-  (setq sublimity-scroll-drift-length 5))
+  (setq sublimity-scroll-weight 10        ;; set scroll weight
+        sublimity-scroll-drift-length 5)) ;; set scroll drift length
 
-;; set window dimensions based on golden ratio
+;; Set window dimensions based on golden ratio
 (use-package golden-ratio
   :ensure t
   :hook (after-init . golden-ratio-mode))
 
-;; useful functions
+;; Useful functions
 (use-package crux
   :ensure t
   :bind (("C-a" . crux-move-beginning-of-line)
@@ -282,89 +279,56 @@
          ("C-x C-l" . crux-downcase-region)
          ("C-x M-c" . crux-capitalize-region)))
 
-;; ivy completion framework
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Ivy
+;; Ivy generic completion framework
 (use-package ivy
   :ensure t
   :delight
   :hook (after-init . ivy-mode)
   :config
-  ;; no regex by default
-  (setq ivy-initial-inputs-alist nil))
+  (setq ivy-initial-inputs-alist nil)) ;; no regex by default
 
-;; ivy-enhanced search
+;; Ivy-enhanced search alternative to isearch
 (use-package swiper
   :ensure t
   :bind (("C-s" . swiper)))
 
-;; ivy-enhanced narrowing
+;; Ivy-enhanced versions of common commands
 (use-package counsel
   :ensure t
   :bind (("M-x" . counsel-M-x)
          ("C-x C-f". counsel-find-file)))
 
-;; counsel support for projectile
-(use-package counsel-projectile
-  :ensure t
-  :hook (after-init . counsel-projectile-mode)
-  :bind (("C-c p" . projectile-command-map)))
-
-;; using flyspell with ivy
-(use-package flyspell-correct-ivy
-  :after flyspell
-  :bind (:map flyspell-mode-map
-              ("C-;" . flyspell-correct-word-generic))
-  :custom (flyspell-correct-interface 'flyspell-correct-ivy))
-
-;; better window switching
+;; Better window switching
 (use-package ace-window
   :ensure t
   :bind (("C-x o" . ace-window)))
 
-;; text completion framework
+;; Auto-completion framework
 (use-package company
   :ensure t
   :delight
   :hook (after-init . global-company-mode)
   :config
-  (setq company-idle-delay 0.1)
-  (setq company-show-numbers t)
-  (setq company-tooltip-limit 10)
-  (setq company-minimum-prefix-length 2)
-  (setq company-tooltip-align-annotations t)
-  (setq company-tooltip-flip-when-above t))
-
-;; display fill-column
-(use-package fill-column-indicator
-  :ensure t
-  :hook (python-mode . fci-mode))
-
-;; indent guide
-(use-package indent-guide
-  :ensure t
-  :hook (python-mode . indent-guide-mode))
+  (setq company-idle-delay 0.1              ;; displays toolip with a delay of 0.1
+        company-show-numbers t              ;; show numbers for hints
+        company-tooltip-limit 10            ;; max. result of 10 in tooltip
+        company-minimum-prefix-length 2     ;; requires 2 chars to start auto-completion
+        company-tooltip-align-annotations t ;; align tooltip annotations
+        company-tooltip-flip-when-above t)) ;; flip direction when displayed above
 
 ;; company front-end with icons
 ;; (use-package company-box
 ;;   :ensure t
 ;;   :hook (company-mode . company-box-mode))
 
-(use-package yasnippet
-  :ensure t
-  :hook (prog-mode . yas-minor-mode)
-  :config
-  (yas-reload-all))
-
-(use-package yasnippet-snippets
-  :ensure t
-  :after yasnippet)
-
-;; search the kill-ring
+;; Search the kill-ring
 (use-package browse-kill-ring
   :ensure t
   :config
   (browse-kill-ring-default-keybindings))
 
-;; suggest next key
+;; Suggest next key
 (use-package which-key
   :ensure t
   :delight
@@ -382,36 +346,11 @@
   :bind (("C-z" . undo)
          ("C-S-z" . redo)))
 
-;; proper indentation
+;; Proper indentation
 (use-package aggressive-indent
   :ensure t
   :delight
   :init (global-aggressive-indent-mode 1))
-
-;; better parenthesis management
-(use-package smartparens
-  :ensure t
-  :delight
-  :hook (prog-mode . smartparens-mode))
-
-;; move line/region up/down
-(use-package move-text
-  :ensure t
-  :bind (([(meta up)] . move-text-up)
-         ([(meta down)] . move-text-down)))
-
-;; colored parenthesis
-(use-package rainbow-delimiters
-  :ensure t
-  :hook (prog-mode . rainbow-delimiters-mode))
-
-;; inline color for a color code like hex
-(use-package rainbow-mode
-  :ensure t
-  :delight
-  :hook (prog-mode . rainbow-mode)
-  :config
-  (setq rainbow-x-colors nil))
 
 ;; macOS fix for reading $PATH
 (use-package exec-path-from-shell
@@ -420,69 +359,187 @@
   :config
   (exec-path-from-shell-initialize))
 
-;; project management
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Projectile
+;; Project management using projectile
 (use-package projectile
   :ensure t
   :delight
   :hook (after-init . projectile-mode)
   :config
-  (setq projectile-completion-system 'ivy))
+  (setq projectile-enable-caching t)        ;; enable caching for large projects
+  (setq projectile-completion-system 'ivy)) ;; use Ivy for completion
 
-;; walk through revisions of a file
+;; Counsel support for projectile
+(use-package counsel-projectile
+  :ensure t
+  :hook (after-init . counsel-projectile-mode)
+  :bind (("C-c p" . projectile-command-map)))
+
+;; Walk through revisions of a file
 (use-package git-timemachine
   :ensure t
   :bind (("C-c C-g" . git-timemachine)))
-
-;; better section and subsections for org mode
-(use-package org-bullets
-  :ensure t
-  :hook (org-mode . org-bullets-mode))
 
 ;; htmlize
 (use-package htmlize
   :ensure t)
 
-;; open macOS apps
+;; Open macOS apps
 (use-package counsel-osx-app
   :ensure t
   :bind (("C-x C-o" . counsel-osx-app)))
 
-;; editorconfig
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Programming
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Utilities
+;; Improved parenthesis management
+(use-package smartparens
+  :ensure t
+  :delight
+  :hook (prog-mode . smartparens-mode))
+
+;; Colored parenthesis
+(use-package rainbow-delimiters
+  :ensure t
+  :hook (prog-mode . rainbow-delimiters-mode))
+
+;; Move line/region up/down
+(use-package move-text
+  :ensure t
+  :bind (([(meta up)] . move-text-up)
+         ([(meta down)] . move-text-down)))
+
+;; Display inline color for a color code
+(use-package rainbow-mode
+  :ensure t
+  :delight
+  :hook (prog-mode . rainbow-mode)
+  :config
+  (setq rainbow-x-colors nil))
+
+;; Indent guide
+(use-package indent-guide
+  :ensure t
+  :hook (prog-mode . indent-guide-mode))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Snippets
+(use-package yasnippet
+  :ensure t
+  :hook ((prog-mode . yas-minor-mode)
+         (go-mode . yas-minor-mode))
+  :config
+  (yas-reload-all)
+  (yas-global-mode))
+
+(use-package yasnippet-snippets
+  :ensure t
+  :after yasnippet)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Editorconfig
+;; Editorconfig support
 (use-package editorconfig
   :ensure t
-  :mode ("\\.editorconfig\\'" . editorconfig-mode))
+  :config
+  (editorconfig-mode 1))
 
-;; better python support
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; LSP (Language Server Protocol)
+
+;; Set prefix for lsp-command-keymap
+(setq lsp-keymap-prefix "C-c l")
+
+;; LSP support
+(use-package lsp-mode
+  :ensure t
+  :hook (
+         ;; enable which-key integration
+         (lsp-mode . lsp-enable-which-key-integration)
+         (go-mode . lsp-deferred)
+         (python-mode . lsp-deferred))
+  :commands (lsp lsp-deferred))
+
+;; LSP for Go
+;; Set up before-save hooks to format buffer and add/delete imports.
+;; Make sure you don't have other gofmt/goimports hooks enabled.
+(defun lsp-go-install-save-hooks ()
+  (add-hook 'before-save-hook #'lsp-format-buffer t t)
+  (add-hook 'before-save-hook #'lsp-organize-imports t t))
+(add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
+
+;; UI for LSP
+(use-package lsp-ui
+  :ensure t
+  :commands lsp-ui-mode)
+
+;; LSP ivy integration
+(use-package lsp-ivy
+  :ensure t
+  :commands lsp-ivy-workspace-symbol)
+
+;; LSP treemacs integration
+;; (use-package lsp-treemacs
+;;   :ensure t
+;;   :config (lsp-treemacs-sync-mode 1))
+
+;; ;; LSP Dart support
+;; (use-package lsp-dart
+;;   :ensure t
+;;   :hook (dart-mode . lsp))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Python
+;; Enhanced Python support
 (use-package anaconda-mode
   :ensure t
   :hook ((python-mode . anaconda-mode)
          (python-mode . anaconda-eldoc-mode)))
 
-;; anaconda backend for company
+;; Anaconda backend for company
 (use-package company-anaconda
   :ensure t
   :config
   (add-to-list 'company-backends 'company-anaconda))
 
-;; use virtualenv for python
+;; Use virtualenv for Python
 (use-package auto-virtualenvwrapper
   :ensure t
   :hook (python-mode . auto-virtualenvwrapper-activate))
 
+;; ;; Display fill-column
+;; (use-package fill-column-indicator
+;;   :ensure t
+;;   :hook (python-mode . fci-mode))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Haskell
 ;; Haskell support
 (use-package haskell-mode
   :ensure t
-  :config
-  (add-hook 'haskell-mode-hook #'subword-mode)
-  (add-hook 'haskell-mode-hook #'interactive-haskell-mode)
-  (add-hook 'haskell-mode-hook #'haskell-doc-mode))
+  :hook ((subword-mode interactive-haskell-mode haskell-doc-mode) . haskell-mode))
+;; :config
+;; (add-hook 'haskell-mode-hook #'subword-mode)
+;; (add-hook 'haskell-mode-hook #'interactive-haskell-mode)
+;; (add-hook 'haskell-mode-hook #'haskell-doc-mode))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Rust
 ;; Rust support
 (use-package rust-mode
   :delight Rust
   :ensure t)
 
-;; Golang support
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Elixir
+;; Elixir support
+;; (use-package elixir-mode
+;;   :ensure t)
+;; :hook (elixir-mode . (lambda ()(add-hook 'before-save-hook 'elixir-format nil t))))
+
+;; Elixir tooling integration
+;; (use-package alchemist
+;;   :ensure t)
+
+;; ;; Elixir backend for company
+;; (use-package company-elixir
+;;   :ensure t
+;;   :hook (elixir-mode . company-elixir))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Go
+;; Go support
 (use-package go-mode
   :ensure t
   :delight Go
@@ -492,11 +549,13 @@
     :ensure t
     :hook (go-mode . go-eldoc-setup)))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; OCaml
 ;; OCaml support
-(use-package tuareg
-  :delight OCaml
-  :ensure t)
+;; (use-package tuareg
+;;   :delight OCaml
+;;   :ensure t)
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Markdown
 ;; Markdown support
 (use-package markdown-mode
   :ensure t
@@ -506,36 +565,75 @@
   :config
   (setq markdown-fontify-code-blocks-natively t))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; YAML
+;; YAML support
+(use-package yaml-mode
+  :ensure t
+  :hook (yaml-mode . (lambda () (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
+  :config
+  (add-to-list 'auto-mode-alist '("\\.yml\\'". yaml-mode)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; UI
 ;; Theme
 (use-package zenburn-theme
   :ensure t
   :config
   (load-theme 'zenburn t))
+;; (use-package doom-themes
+;;   :ensure t
+;;   :config
+;;   ;; Global settings
+;;   (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
+;;         doom-themes-enable-italic t) ; if nil, italics is universally disabled
+;;   (load-theme 'doom-peacock t)
+;;   ;; enable flashing mode-line on errors
+;;   (doom-themes-visual-bell-config)
+;;   ;; enable custom theme for neotree
+;;   (doom-themes-neotree-config)
+;;   ;; Corrects (and improves) org-mode's native fontification.
+;;   (doom-themes-org-config))
 
-;; modeline
-(use-package mood-line
+;; Enhanced modeline UI
+(use-package doom-modeline
   :ensure t
-  :hook (after-init . mood-line-mode))
+  :init (doom-modeline-mode 1))
+  ;; :config
+  ;; (setq doom-modeline-icon (display-graphic-p))
+  ;; (setq doom-modeline-major-mode-icon t)
+  ;; (setq doom-modeline-major-mode-color-icon t)
+  ;; (setq doom-modeline-lsp t))
 
-;; beacon for finding cursor
+;; Distinguish between file-visiting windows and other windows
+(use-package solaire-mode
+  :ensure t
+  :hook (after-init . solaire-global-mode))
+
+;; Use tabs for active buffers
+;; (use-package awesome-tab
+;;   :ensure t
+;;   :config
+;;   (awesome-tab-mode t))
+
+;; Finding cursor made easy
 (use-package beacon
   :ensure t
   :delight
   :hook (after-init . beacon-mode))
 
-;; temporarily highlight changes from yanking, etc
+;; Temporarily highlight changes from yanking, etc.
 (use-package volatile-highlights
   :ensure t
   :delight
   :config
   (volatile-highlights-mode t))
 
-;; syntax checker
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Utilities
+;; Syntax checker
 (use-package flycheck
   :ensure t
   :init (global-flycheck-mode))
 
-;; expand selection by semantics
+;; Expand selection by semantics
 (use-package expand-region
   :ensure t
   :bind (("C-=" . er/expand-region)
@@ -546,6 +644,7 @@
   :ensure t
   :bind ("C-x g" . magit-status))
 
+;; Git diff highlight
 (use-package diff-hl
   :ensure t
   :hook
@@ -553,19 +652,19 @@
    (dired-mode-hook . diff-hl-dired-mode)
    (magit-post-refresh-hook . diff-hl-magit-post-refresh)))
 
-;; improve speed typing
+;; Improve speed typing
 (use-package speed-type
   :ensure t)
 
-;; try a package before installing
+;; Try a package before installing
 (use-package try
   :ensure t)
 
-;; managing init system daemons
+;; Managing init system daemons
 (use-package daemons
   :ensure t)
 
-;; config changes made through the customize UI will be stored here
+;; Config changes made through the customize UI will be stored here
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 
 (when (file-exists-p custom-file)
@@ -574,5 +673,5 @@
 ;;; init.el ends here
 (put 'dired-find-alternate-file 'disabled nil)
 
-;; Make gc pauses faster by decreasing the threshold.
-(setq gc-cons-threshold (* 2 1000 1000))
+;; ;; Make gc pauses faster by decreasing the threshold.
+;; (setq gc-cons-threshold (* 2 1000 1000))
