@@ -577,9 +577,9 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Haskell
 ;; Haskell support
-(use-package haskell-mode
-  :ensure t
-  :hook ((subword-mode interactive-haskell-mode haskell-doc-mode) . haskell-mode))
+;; (use-package haskell-mode
+;;   :ensure t
+;;   :hook ((subword-mode interactive-haskell-mode haskell-doc-mode) . haskell-mode))
 ;; :config
 ;; (add-hook 'haskell-mode-hook #'subword-mode)
 ;; (add-hook 'haskell-mode-hook #'interactive-haskell-mode)
