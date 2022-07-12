@@ -443,27 +443,17 @@
   (editorconfig-mode 1))
 
 
-;; Set prefix for lsp-command-keymap
-(setq lsp-keymap-prefix "C-c l")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; LSP (Language Server Protocol) support
 ;; LSP support via lsp-mode
 (use-package lsp-mode
   :ensure t
   :hook (
-         ;; enable which-key integration
-         (lsp-mode . lsp-enable-which-key-integration)
-         (go-mode . lsp-deferred)
-         (python-mode . lsp-deferred))
-  :commands (lsp lsp-deferred))
-
-;; LSP for Go
-;; Set up before-save hooks to format buffer and add/delete imports.
-;; Make sure you don't have other gofmt/goimports hooks enabled.
-(defun lsp-go-install-save-hooks ()
-  (add-hook 'before-save-hook #'lsp-format-buffer t t)
-  (add-hook 'before-save-hook #'lsp-organize-imports t t))
-(add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
+         (lsp-mode . lsp-enable-which-key-integration) ;; enable which-key integration
+         (prog-mode . lsp-deferred))  ;; automatically start 'lsp' for programming
+  :commands (lsp lsp-deferred)
+  :config
+  (setq lsp-keymap-prefix "C-c l"))  ;; prefix for lsp-command-keymap
 
 ;; UI for lsp-mode via lsp-ui
 (use-package lsp-ui
