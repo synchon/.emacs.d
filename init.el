@@ -480,8 +480,6 @@
 ;;   :ensure t
 ;;   :config (lsp-treemacs-sync-mode 1))
 
-;; ;; LSP Dart support
-;; (use-package lsp-dart
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Python
 ;; General config for python-mode
 (use-package python
@@ -508,7 +506,6 @@
 ;; ;; LSP for Python
 ;; (use-package lsp-pyright
 ;;   :ensure t
-;;   :hook (dart-mode . lsp))
 ;;   :hook (python-mode . lsp-deferred))
 
 ;; ;; Format code as per black code formatter rules
@@ -591,6 +588,9 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Go
 ;; Go support
 (use-package go-mode
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Dart
+;; LSP for Dart
+(use-package lsp-dart
   :ensure t
   :delight Go
   :hook (before-save . gofmt-before-save)
@@ -598,6 +598,7 @@
   (use-package go-eldoc
     :ensure t
     :hook (go-mode . go-eldoc-setup)))
+  :hook (dart-mode . lsp))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; OCaml
 ;; OCaml support
