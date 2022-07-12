@@ -334,7 +334,7 @@
   :delight
   :hook (after-init . which-key-mode)
   :config
-  (setq which-key-idle-delay 0.1))
+  (setq which-key-idle-delay 0.0))
 
 ;; undo-tree
 (use-package undo-tree
