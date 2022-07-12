@@ -482,31 +482,80 @@
 
 ;; ;; LSP Dart support
 ;; (use-package lsp-dart
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Python
+;; General config for python-mode
+(use-package python
+  :delight Python
+  ;; :interpreter
+  ;; ("python3" . python-mode))
+  :preface
+  (defun lsp-python-install-save-hooks ()
+    (add-hook 'before-save-hook #'lsp-format-buffer t t)
+    (add-hook 'before-save-hook #'lsp-organize-imports t t))
+  :hook
+  (python-mode . lsp-python-install-save-hooks))
+
+;; (defun python-remove-unused-imports()
+;;   ;; Removes unused imports and unused variables with autoflake.
+;;   (interactive)
+;;   (if (executable-find "autoflake")
+;;       (progn
+;;         (shell-command (format "autoflake --remove-all-unused-imports -i %s"
+;;                                (shell-quote-argument (buffer-file-name))))
+;;         (revert-buffer t t t))
+;;     (warn "python-mode: Cannot find autoflake executable."))))
+
+;; ;; LSP for Python
+;; (use-package lsp-pyright
 ;;   :ensure t
 ;;   :hook (dart-mode . lsp))
+;;   :hook (python-mode . lsp-deferred))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Python
-;; Enhanced Python support
-(use-package anaconda-mode
-  :ensure t
-  :hook ((python-mode . anaconda-mode)
-         (python-mode . anaconda-eldoc-mode)))
-
-;; Anaconda backend for company
-(use-package company-anaconda
-  :ensure t
-  :config
-  (add-to-list 'company-backends 'company-anaconda))
-
-;; Use virtualenv for Python
-(use-package auto-virtualenvwrapper
-  :ensure t
-  :hook (python-mode . auto-virtualenvwrapper-activate))
-
-;; ;; Display fill-column
-;; (use-package fill-column-indicator
+;; ;; Format code as per black code formatter rules
+;; (use-package blacken
 ;;   :ensure t
-;;   :hook (python-mode . fci-mode))
+;;   :delight
+;;   :hook (python-mode . blacken-mode)
+;;   :custom (blacken-line-length 79))
+
+;; ;; Sort imports as per isort
+;; (use-package py-isort
+;;   :ensure t
+;;   :after python
+;;   :hook ((python-mode . pyvenv-mode)
+;;          (before-save . py-isort-before-save)))
+
+;; (use-package pyenv-mode
+;;   :after python
+;;   :hook ((python-mode . pyenv-mode)
+;;          (projectile-switch-project . projectile-pyenv-mode-set))
+;;   :custom (pyenv-mode-set "3.8.5")
+;;   :preface
+;;   (defun projectile-pyenv-mode-set ()
+;;     ;; Set pyenv version matching project name.
+;;     (let ((project (projectile-project-name)))
+;;       (if (member project (pyenv-mode-versions))
+;;           (pyenv-mode-set project)
+;;         (pyenv-mode-unset)))))
+
+;; ;; Virtualenv support
+;; (use-package pyvenv
+;;   :ensure t
+;;   :after python
+;;   :hook (python-mode . pyvenv-mode)
+;;   :custom
+;;   (pyvenv-default-virtual-env-name "env")
+;;   (pyvenv-mode-line-indicator '(pyvenv-virtual-env-name ("[venv:"
+;;                                                          pyvenv-virtual-env-name "]"))))
+
+;; ;; Poetry support
+;; (use-package poetry
+;;   :ensure t
+;;   :bind ("C-x p" . poetry))
+
+  :ensure t
+
+;;   :ensure t
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Haskell
 ;; Haskell support
