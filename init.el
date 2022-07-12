@@ -310,10 +310,10 @@
   :delight
   :hook (after-init . global-company-mode)
   :config
-  (setq company-idle-delay 0.1              ;; displays toolip with a delay of 0.1
-        company-show-numbers t              ;; show numbers for hints
+  (setq company-idle-delay 0.0              ;; displays toolip with a delay of 0.0
+        company-show-quick-access nil       ;; do not show numbers for hints
         company-tooltip-limit 10            ;; max. result of 10 in tooltip
-        company-minimum-prefix-length 2     ;; requires 2 chars to start auto-completion
+        company-minimum-prefix-length 1     ;; requires 1 chars to start auto-completion
         company-tooltip-align-annotations t ;; align tooltip annotations
         company-tooltip-flip-when-above t)) ;; flip direction when displayed above
 
