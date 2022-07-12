@@ -423,17 +423,17 @@
 ;;   :hook (prog-mode . indent-guide-mode))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Snippets
-(use-package yasnippet
-  :ensure t
-  :hook ((prog-mode . yas-minor-mode)
-         (go-mode . yas-minor-mode))
-  :config
-  (yas-reload-all)
-  (yas-global-mode))
+;; (use-package yasnippet
+;;   :ensure t
+;;   :hook ((prog-mode . yas-minor-mode)
+;;          (go-mode . yas-minor-mode))
+;;   :config
+;;   (yas-reload-all)
+;;   (yas-global-mode))
 
-(use-package yasnippet-snippets
-  :ensure t
-  :after yasnippet)
+;; (use-package yasnippet-snippets
+;;   :ensure t
+;;   :after yasnippet)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Editorconfig
 ;; Editorconfig support
