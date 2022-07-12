@@ -381,8 +381,8 @@
   :bind (("C-c C-g" . git-timemachine)))
 
 ;; htmlize
-(use-package htmlize
-  :ensure t)
+;; (use-package htmlize
+;;   :ensure t)
 
 ;; Open macOS apps
 (use-package counsel-osx-app
