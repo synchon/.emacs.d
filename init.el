@@ -210,7 +210,8 @@
 
 ;; Fancy icons
 (use-package all-the-icons
-  :ensure t)
+  :ensure t
+  :if (display-graphic-p))
 
 ;; Dashboard for emacs
 (use-package dashboard
