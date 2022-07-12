@@ -255,12 +255,12 @@
   :delight)
 
 ;; Smooth scrolling
-(use-package sublimity
-  :ensure t
-  :hook (after-init . sublimity-mode)
-  :config
-  (setq sublimity-scroll-weight 10        ;; set scroll weight
-        sublimity-scroll-drift-length 5)) ;; set scroll drift length
+;; (use-package sublimity
+;;   :ensure t
+;;   :hook (after-init . sublimity-mode)
+;;   :config
+;;   (setq sublimity-scroll-weight 10        ;; set scroll weight
+;;         sublimity-scroll-drift-length 5)) ;; set scroll drift length
 
 ;; Set window dimensions based on golden ratio
 (use-package golden-ratio
