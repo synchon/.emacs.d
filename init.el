@@ -185,15 +185,15 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Org-mode
 ;; Org-mode customizations
-(use-package org
-  :hook ((org-mode . turn-on-org-cdlatex))
-  :config
-  (setq org-list-allow-alphabetical t))
+;; (use-package org
+;;   :hook ((org-mode . turn-on-org-cdlatex))
+;;   :config
+;;   (setq org-list-allow-alphabetical t))
 
-;; Improved section and subsections for org-mode
-(use-package org-bullets
-  :ensure t
-  :hook (org-mode . org-bullets-mode))
+;; ;; Improved section and subsections for org-mode
+;; (use-package org-bullets
+;;   :ensure t
+;;   :hook (org-mode . org-bullets-mode))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; General utilities
 ;; Restart Emacs from within Emacs
