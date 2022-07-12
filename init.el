@@ -343,6 +343,7 @@
   :init (global-undo-tree-mode 1)
   :config
   (defalias 'redo 'undo-tree-redo)
+  (setq undo-tree-auto-save-history nil)  ;; don't save undo-tree history to file
   :bind (("C-z" . undo)
          ("C-S-z" . redo)))
 
