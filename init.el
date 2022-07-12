@@ -49,7 +49,7 @@
 (add-to-list 'package-archives '("gnu" . "https://elpa.gnu.org/packages/"))
 (package-initialize)
 
-;; Setup use-package
+;; Setup 'use-package'
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
@@ -245,7 +245,7 @@
         projectile-switch-project-action 'neotree-projectile-action ;; integrate with projectile-switch-project
         neo-window-width 40))                                       ;; increase default neotree buffer width
 
-;; delight
+;; Custom major mode name
 (use-package delight
   :ensure t)
 
@@ -279,8 +279,7 @@
          ("C-x C-l" . crux-downcase-region)
          ("C-x M-c" . crux-capitalize-region)))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Ivy
-;; Ivy generic completion framework
+;; Generic completion framework for 'M-x'
 (use-package ivy
   :ensure t
   :delight
@@ -288,23 +287,23 @@
   :config
   (setq ivy-initial-inputs-alist nil)) ;; no regex by default
 
-;; Ivy-enhanced search alternative to isearch
-(use-package swiper
-  :ensure t
-  :bind (("C-s" . swiper)))
-
-;; Ivy-enhanced versions of common commands
+;; 'ivy'-enhanced versions of common emacs commands
 (use-package counsel
   :ensure t
   :bind (("M-x" . counsel-M-x)
          ("C-x C-f". counsel-find-file)))
+
+;; 'ivy'-enhanced search alternative to 'isearch'
+(use-package swiper
+  :ensure t
+  :bind (("C-s" . swiper)))
 
 ;; Better window switching
 (use-package ace-window
   :ensure t
   :bind (("C-x o" . ace-window)))
 
-;; Auto-completion framework
+;; In-buffer text auto-completion framework
 (use-package company
   :ensure t
   :delight
@@ -317,7 +316,7 @@
         company-tooltip-align-annotations t ;; align tooltip annotations
         company-tooltip-flip-when-above t)) ;; flip direction when displayed above
 
-;; company front-end with icons
+;; 'company' front-end with icons
 ;; (use-package company-box
 ;;   :ensure t
 ;;   :hook (company-mode . company-box-mode))
@@ -346,7 +345,7 @@
   :bind (("C-z" . undo)
          ("C-S-z" . redo)))
 
-;; Proper indentation
+;; Proper indentation for code blocks
 (use-package aggressive-indent
   :ensure t
   :delight
@@ -359,15 +358,14 @@
   :config
   (exec-path-from-shell-initialize))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Projectile
-;; Project management using projectile
+;; Project management
 (use-package projectile
   :ensure t
   :delight
   :hook (after-init . projectile-mode)
   :config
   (setq projectile-enable-caching t)        ;; enable caching for large projects
-  (setq projectile-completion-system 'ivy)) ;; use Ivy for completion
+  (setq projectile-completion-system 'ivy)) ;; use 'ivy' for completion
 
 ;; Counsel support for projectile
 (use-package counsel-projectile
@@ -375,7 +373,7 @@
   :hook (after-init . counsel-projectile-mode)
   :bind (("C-c p" . projectile-command-map)))
 
-;; Walk through revisions of a file
+;; Walk through git revisions of a file
 (use-package git-timemachine
   :ensure t
   :bind (("C-c C-g" . git-timemachine)))
@@ -441,12 +439,12 @@
   :config
   (editorconfig-mode 1))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; LSP (Language Server Protocol)
 
 ;; Set prefix for lsp-command-keymap
 (setq lsp-keymap-prefix "C-c l")
 
-;; LSP support
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; LSP (Language Server Protocol) support
+;; LSP support via lsp-mode
 (use-package lsp-mode
   :ensure t
   :hook (
@@ -464,17 +462,17 @@
   (add-hook 'before-save-hook #'lsp-organize-imports t t))
 (add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
 
-;; UI for LSP
+;; UI for lsp-mode via lsp-ui
 (use-package lsp-ui
   :ensure t
   :commands lsp-ui-mode)
 
-;; LSP ivy integration
+;; lsp-mode ivy integration
 (use-package lsp-ivy
   :ensure t
   :commands lsp-ivy-workspace-symbol)
 
-;; LSP treemacs integration
+;; lsp-mode treemacs integration
 ;; (use-package lsp-treemacs
 ;;   :ensure t
 ;;   :config (lsp-treemacs-sync-mode 1))
