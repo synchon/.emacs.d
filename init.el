@@ -462,8 +462,8 @@
 
 ;; lsp-mode ivy integration
 (use-package lsp-ivy
-  :ensure t
-  :commands lsp-ivy-workspace-symbol)
+    :ensure t
+    :commands lsp-ivy-workspace-symbol)
 
 ;; lsp-mode treemacs integration
 ;; (use-package lsp-treemacs
