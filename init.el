@@ -418,9 +418,9 @@
   (setq rainbow-x-colors nil))
 
 ;; Indent guide
-(use-package indent-guide
-  :ensure t
-  :hook (prog-mode . indent-guide-mode))
+;; (use-package indent-guide
+;;   :ensure t
+;;   :hook (prog-mode . indent-guide-mode))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Snippets
 (use-package yasnippet
