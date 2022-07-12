@@ -587,9 +587,9 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Rust
 ;; Rust support
-(use-package rust-mode
-  :delight Rust
-  :ensure t)
+;; (use-package rust-mode
+;;   :delight Rust
+;;   :ensure t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Elixir
 ;; Elixir support
