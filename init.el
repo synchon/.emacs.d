@@ -627,33 +627,20 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; UI
 ;; Theme
-(use-package zenburn-theme
-  :ensure t
-  :config
-  (load-theme 'zenburn t))
-;; (use-package doom-themes
-;;   :ensure t
-;;   :config
-;;   ;; Global settings
-;;   (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
-;;         doom-themes-enable-italic t) ; if nil, italics is universally disabled
-;;   (load-theme 'doom-peacock t)
-;;   ;; enable flashing mode-line on errors
-;;   (doom-themes-visual-bell-config)
-;;   ;; enable custom theme for neotree
-;;   (doom-themes-neotree-config)
-;;   ;; Corrects (and improves) org-mode's native fontification.
-;;   (doom-themes-org-config))
+(use-package color-theme-sanityinc-tomorrow
+  :ensure t)
 
 ;; Enhanced modeline UI
 (use-package doom-modeline
   :ensure t
-  :init (doom-modeline-mode 1))
-  ;; :config
-  ;; (setq doom-modeline-icon (display-graphic-p))
-  ;; (setq doom-modeline-major-mode-icon t)
-  ;; (setq doom-modeline-major-mode-color-icon t)
-  ;; (setq doom-modeline-lsp t))
+  :init (doom-modeline-mode 1)
+  :config
+  (setq doom-modeline-icon (display-graphic-p))  ;; display icons
+  (setq doom-modeline-major-mode-icon t)  ;; display major mode icon
+  (setq doom-modeline-major-mode-color-icon t)  ;; display color icon for major mode
+  (setq doom-modeline-buffer-name t)  ;; display buffer name
+  (setq doom-modeline-minor-modes nil) ;; don't display minor mode
+  (setq doom-modeline-lsp t))  ;; display LSP state
 
 ;; Distinguish between file-visiting windows and other windows
 (use-package solaire-mode
