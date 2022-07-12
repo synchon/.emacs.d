@@ -442,6 +442,9 @@
 ;;   :config
 ;;   (editorconfig-mode 1))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Jupyter Notebook
+(use-package ein
+  :ensure t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; LSP (Language Server Protocol) support
 ;; LSP support via lsp-mode
