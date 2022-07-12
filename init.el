@@ -673,10 +673,10 @@
   :init (global-flycheck-mode))
 
 ;; Expand selection by semantics
-(use-package expand-region
-  :ensure t
-  :bind (("C-=" . er/expand-region)
-         ("C--" . er/contract-region)))
+;; (use-package expand-region
+;;   :ensure t
+;;   :bind (("C-=" . er/expand-region)
+;;          ("C--" . er/contract-region)))
 
 ;; Git interface
 (use-package magit
