@@ -437,11 +437,10 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Editorconfig
 ;; Editorconfig support
-(use-package editorconfig
-  :ensure t
-  :config
-  (editorconfig-mode 1))
-
+;; (use-package editorconfig
+;;   :ensure t
+;;   :config
+;;   (editorconfig-mode 1))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; LSP (Language Server Protocol) support
