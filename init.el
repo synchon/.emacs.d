@@ -120,9 +120,11 @@
   (visual-line-mode)
   (beacon-mode)
   :bind (("s-1" . text-scale-increase)
-         ("s-2" . text-scale-decrease)))
-;; :hook ((before-save . delete-trailing-whitespace)
-;;        (prog-mode . electric-pair-mode)))
+         ("s-2" . text-scale-decrease))
+  ;; :hook ((before-save . delete-trailing-whitespace)
+  ;;        (prog-mode . electric-pair-mode)))
+  :config
+  (setq auth-sources '("~/.authinfo")))
 
 ;; Display matching parenthesis
 (use-package paren
@@ -685,6 +687,16 @@
 (use-package magit
   :ensure t
   :bind ("C-x g" . magit-status))
+
+;; Ghub for Forge
+(use-package ghub
+  :ensure t
+  :after magit)
+
+;; Forge for Magit
+(use-package forge
+  :ensure t
+  :after ghub)
 
 ;; Git diff highlight
 (use-package diff-hl
