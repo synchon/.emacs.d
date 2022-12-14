@@ -1,6 +1,6 @@
 ;;; init.el --- Configuration file for Emacs >= 24.3
 ;;
-;; Copyright (c) 2018-2021 Synchon Mandal
+;; Copyright (c) 2018-2022 Synchon Mandal
 ;;
 ;; Author: Synchon Mandal <synchon@protonmail.com>
 ;; URL: https://github.com/synchon/emacs.d
