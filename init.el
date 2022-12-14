@@ -175,8 +175,10 @@
   :hook ((text-mode . flyspell-mode)
          (prog-mode . flyspell-prog-mode))
   :config
-  (setq ispell-program-name "aspell"              ;; use `aspell` for ispell
-        ispell-extra-args '("--sug-mode=ultra"))) ;; use `ultra` mode for aspell
+  ;; use `aspell` for ispell
+  (setq ispell-program-name "aspell")
+  ;; use `ultra` mode for aspell
+  (setq ispell-extra-args '("--sug-mode=ultra" "--camel-case" "--lang=en_UK")))
 
 ;; Using flyspell with ivy
 (use-package flyspell-correct-ivy
