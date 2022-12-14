@@ -593,10 +593,10 @@
 ;;   :hook (elixir-mode . company-elixir))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Dart
-;; LSP for Dart
-(use-package lsp-dart
-  :ensure t
-  :hook (dart-mode . lsp))
+;; ;; LSP for Dart
+;; (use-package lsp-dart
+;;   :ensure t
+;;   :hook (dart-mode . lsp))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; OCaml
 ;; OCaml support
