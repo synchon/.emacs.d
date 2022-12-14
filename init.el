@@ -725,6 +725,7 @@
   :hook
   ((after-init . global-diff-hl-mode)
    (dired-mode-hook . diff-hl-dired-mode)
+   (magit-pre-refresh-hook . diff-hl-magit-pre-refresh)
    (magit-post-refresh-hook . diff-hl-magit-post-refresh)))
 
 ;; Improve speed typing
