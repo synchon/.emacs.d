@@ -485,14 +485,12 @@
 ;; General config for python-mode
 (use-package python
   :delight Python
-  ;; :interpreter
-  ;; ("python3" . python-mode))
-  :preface
-  (defun lsp-python-install-save-hooks ()
-    (add-hook 'before-save-hook #'lsp-format-buffer t t)
-    (add-hook 'before-save-hook #'lsp-organize-imports t t))
-  :hook
-  (python-mode . lsp-python-install-save-hooks))
+  :hook (python-mode . tree-sitter-hl-mode))
+
+;; LSP for Python
+(use-package lsp-pyright
+  :ensure t
+  :hook (python-mode . lsp-deferred))
 
 ;; (defun python-remove-unused-imports()
 ;;   ;; Removes unused imports and unused variables with autoflake.
@@ -503,11 +501,6 @@
 ;;                                (shell-quote-argument (buffer-file-name))))
 ;;         (revert-buffer t t t))
 ;;     (warn "python-mode: Cannot find autoflake executable."))))
-
-;; ;; LSP for Python
-;; (use-package lsp-pyright
-;;   :ensure t
-;;   :hook (python-mode . lsp-deferred))
 
 ;; ;; Format code as per black code formatter rules
 ;; (use-package blacken
