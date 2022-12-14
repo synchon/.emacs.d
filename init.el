@@ -239,6 +239,17 @@
             "Restart Emacs"
             (lambda (&rest _) (restart-emacs)))))))
 
+;; Project management
+(use-package projectile
+  :ensure t
+  :delight
+  :hook (after-init . projectile-mode)
+  :config
+  ;; enable caching for large projects
+  (setq projectile-enable-caching t)
+  ;; use 'ivy' for completion
+  (setq projectile-completion-system 'ivy))
+
 ;; Neotree
 (use-package neotree
   :ensure t
@@ -363,15 +374,6 @@
   :ensure t
   :config
   (exec-path-from-shell-initialize))
-
-;; Project management
-(use-package projectile
-  :ensure t
-  :delight
-  :hook (after-init . projectile-mode)
-  :config
-  (setq projectile-enable-caching t)        ;; enable caching for large projects
-  (setq projectile-completion-system 'ivy)) ;; use 'ivy' for completion
 
 ;; Counsel support for projectile
 (use-package counsel-projectile
