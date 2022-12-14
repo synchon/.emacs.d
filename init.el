@@ -539,10 +539,10 @@
 ;;   (pyvenv-mode-line-indicator '(pyvenv-virtual-env-name ("[venv:"
 ;;                                                          pyvenv-virtual-env-name "]"))))
 
-;; ;; Poetry support
-;; (use-package poetry
-;;   :ensure t
-;;   :bind ("C-x p" . poetry))
+;; Poetry support
+(use-package poetry
+  :ensure t
+  :bind ("C-x p" . poetry))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Go
 ;; General config for go-mode
