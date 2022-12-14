@@ -461,7 +461,10 @@
          (prog-mode . lsp-deferred))  ;; automatically start 'lsp' for programming
   :commands (lsp lsp-deferred)
   :config
-  (setq lsp-keymap-prefix "C-c l"))  ;; prefix for lsp-command-keymap
+  ;; prefix for lsp-command-keymap
+  (setq lsp-keymap-prefix "C-c l")
+  ;; don't warn for no client found
+  (setq lsp-warn-no-matched-clients nil))
 
 ;; UI for lsp-mode via lsp-ui
 (use-package lsp-ui
