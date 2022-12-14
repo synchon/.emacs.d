@@ -452,6 +452,16 @@
 (use-package ein
   :ensure t)
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; tree-sitter support for improved parsing and syntax highlighting
+(use-package tree-sitter
+  :ensure t
+  :config
+  (global-tree-sitter-mode))
+
+(use-package tree-sitter-langs
+  :ensure t
+  :after tree-sitter)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; LSP (Language Server Protocol) support
 ;; LSP support via lsp-mode
 (use-package lsp-mode
