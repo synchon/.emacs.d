@@ -548,24 +548,16 @@
 ;; General config for go-mode
 (use-package go-mode
   :ensure t
-  :delight Go
-  )
-
-;; Go support
-;; (use-package go-mode
-;;   :ensure t
-;;   :delight Go)
-;; :hook (before-save . gofmt-before-save)
-;; :config
-;; (use-package go-eldoc
-;;   :ensure t
-;;   :hook (go-mode . go-eldoc-setup)))
+  :delight Go)
 
 ;; LSP support (https://github.com/golang/tools/blob/master/gopls/doc/emacs.md#loading-lsp-mode-in-emacs)
 ;; Set up before-save hooks to format buffer and add/delete imports.
 ;; Make sure you don't have other gofmt/goimports hooks enabled.
 (defun lsp-go-install-save-hooks ()
+  ;; Adds hooks for go mode using LSP.
+  ;; format buffer using gofmt
   (add-hook 'before-save-hook #'lsp-format-buffer t t)
+  ;; organize imports using goimports
   (add-hook 'before-save-hook #'lsp-organize-imports t t))
 (add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
 
