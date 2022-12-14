@@ -647,12 +647,26 @@
   :ensure t
   :init (doom-modeline-mode 1)
   :config
-  (setq doom-modeline-icon (display-graphic-p))  ;; display icons
-  (setq doom-modeline-major-mode-icon t)  ;; display major mode icon
-  (setq doom-modeline-major-mode-color-icon t)  ;; display color icon for major mode
-  (setq doom-modeline-buffer-name t)  ;; display buffer name
-  (setq doom-modeline-minor-modes nil) ;; don't display minor mode
-  (setq doom-modeline-lsp t))  ;; display LSP state
+  ;; set modeline height
+  (setq doom-modeline-height 30)
+  ;; use hud unstead of default bar
+  (setq doom-modeline-hud t)
+  ;; no limit for window width
+  (setq doom-modeline-window-width-limit nil)
+  ;; display icons if in GUI
+  (setq doom-modeline-icon (display-graphic-p))
+  ;; display major mode icon if in GUI
+  (setq doom-modeline-major-mode-icon (display-graphic-p))
+  ;; display color icon for major mode if in GUI
+  (setq doom-modeline-major-mode-color-icon (display-graphic-p))
+  ;; display buffer name
+  (setq doom-modeline-buffer-name t)
+  ;; don't display minor mode
+  (setq doom-modeline-minor-modes nil)
+  ;; display LSP state
+  (setq doom-modeline-lsp t)
+  ;; display GitHub notificatons
+  (setq doom-modeline-github t))
 
 ;; Distinguish between file-visiting windows and other windows
 (use-package solaire-mode
