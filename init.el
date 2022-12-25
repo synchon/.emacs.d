@@ -626,11 +626,11 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; YAML
 ;; YAML support
-;; (use-package yaml-mode
-;;   :ensure t
-;;   :hook (yaml-mode . (lambda () (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
-;;   :config
-;;   (add-to-list 'auto-mode-alist '("\\.yml\\'". yaml-mode)))
+(use-package yaml-mode
+  :ensure t
+  :hook (yaml-mode . (lambda () (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
+  :config
+  (add-to-list 'auto-mode-alist '("\\.yml\\'". yaml-mode)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; DAP (Debugging Adapter Protocol) support
 (use-package dap-mode
