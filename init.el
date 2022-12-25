@@ -178,7 +178,7 @@
   ;; use `aspell` for ispell
   (setq ispell-program-name "aspell")
   ;; use `ultra` mode for aspell
-  (setq ispell-extra-args '("--sug-mode=ultra" "--camel-case" "--lang=en_UK")))
+  (setq ispell-extra-args '("--sug-mode=ultra" "--camel-case" "--lang=en_GB")))
 
 ;; Using flyspell with ivy
 (use-package flyspell-correct-ivy
