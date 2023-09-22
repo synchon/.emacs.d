@@ -212,10 +212,11 @@
   :config
   (dashboard-setup-startup-hook)
   (setq dashboard-startup-banner 'logo                  ;; use logo for banner
-        dashboard-set-navigator t                       ;; show navigator
+        dashboard-projects-backend 'project-el          ;; set project backend
         dashboard-items '((recents . 5) (projects . 5)) ;; restrict recents and projects to 5
         dashboard-set-heading-icons t                   ;; show icons
         dashboard-set-file-icons t                      ;; show file icons
+        dashboard-set-navigator t                       ;; show navigator
         dashboard-navigator-buttons                     ;; customize navigator buttons
         ;; Format: "(icon title help action face prefix suffix)"
         `(;; line1
