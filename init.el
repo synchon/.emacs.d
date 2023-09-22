@@ -269,10 +269,7 @@
 
   :ensure t
 
-;; 'ivy'-enhanced search alternative to 'isearch'
-(use-package swiper
   :ensure t
-  :bind (("C-s" . swiper)))
 
 ;; Better window switching
 (use-package ace-window
