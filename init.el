@@ -493,6 +493,10 @@
 ;;   :hook (elixir-mode . company-elixir))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Dart
+;; Dart support
+(use-package dart-mode
+  :ensure t
+  :delight Dart)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; OCaml
 ;; OCaml support
