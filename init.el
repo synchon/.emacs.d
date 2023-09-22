@@ -52,7 +52,7 @@
 (scroll-bar-mode -1 )                    ;; no scroll bar
 (global-display-line-numbers-mode 1)     ;; line numbers
 (blink-cursor-mode -1)                   ;; no blinking cursor
-(set-frame-font "IBM Plex Mono 14")      ;; font
+(set-frame-font "Iosevka Extended 15")   ;; font
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
