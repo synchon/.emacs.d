@@ -301,11 +301,6 @@
   :ensure t
   :bind (("C-x o" . ace-window)))
 
-;; 'company' front-end with icons
-;; (use-package company-box
-;;   :ensure t
-;;   :hook (company-mode . company-box-mode))
-
 ;; Search the kill-ring
 (use-package browse-kill-ring
   :ensure t
