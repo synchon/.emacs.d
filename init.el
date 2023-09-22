@@ -338,12 +338,6 @@
   :bind (("C-z" . undo)
          ("C-S-z" . redo)))
 
-;; Proper indentation for code blocks
-(use-package aggressive-indent
-  :ensure t
-  :delight
-  :init (global-aggressive-indent-mode 1))
-
 ;; macOS fix for reading $PATH
 (use-package exec-path-from-shell
   :if (memq window-system '(mac ns))
