@@ -621,10 +621,6 @@
    (magit-pre-refresh-hook . diff-hl-magit-pre-refresh)
    (magit-post-refresh-hook . diff-hl-magit-post-refresh)))
 
-;; Improve speed typing
-(use-package speed-type
-  :ensure t)
-
 ;; Try a package before installing
 (use-package try
   :ensure t)
