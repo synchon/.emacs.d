@@ -293,7 +293,14 @@
   :init
   (marginalia-mode))
 
+;; Enable fonts with rich annotations via `marginalia'
+(use-package nerd-icons-completion
   :ensure t
+  :after marginalia
+  :hook (marginalia-mode . nerd-icons-completion-marginalia-setup)
+  :config
+  (nerd-icons-completion-mode))
+
 
 ;; Better window switching
 (use-package ace-window
