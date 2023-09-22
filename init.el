@@ -52,6 +52,7 @@
 (scroll-bar-mode -1 )                    ;; no scroll bar
 (global-display-line-numbers-mode 1)     ;; line numbers
 (blink-cursor-mode -1)                   ;; no blinking cursor
+(pixel-scroll-precision-mode)            ;; smooth scrolling
 (set-frame-font "Iosevka Extended 15")   ;; font
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -248,14 +249,6 @@
 ;; Native package called to remove mode from modeline
 (use-package eldoc
   :delight)
-
-;; Smooth scrolling
-;; (use-package sublimity
-;;   :ensure t
-;;   :hook (after-init . sublimity-mode)
-;;   :config
-;;   (setq sublimity-scroll-weight 10        ;; set scroll weight
-;;         sublimity-scroll-drift-length 5)) ;; set scroll drift length
 
 ;; Set window dimensions based on golden ratio
 (use-package golden-ratio
