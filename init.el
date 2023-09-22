@@ -170,13 +170,6 @@
   ;; use `ultra' mode for aspell
   (setq ispell-extra-args '("--sug-mode=ultra" "--camel-case" "--master=en" "--lang=GB")))
 
-;; Using flyspell with ivy
-(use-package flyspell-correct-ivy
-  :after flyspell
-  :bind (:map flyspell-mode-map
-              ("C-;" . flyspell-correct-word-generic))
-  :custom (flyspell-correct-interface 'flyspell-correct-ivy))
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Org-mode
 ;; Org-mode customizations
 ;; (use-package org
