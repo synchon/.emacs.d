@@ -436,43 +436,17 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; LSP (Language Server Protocol) support
-;; LSP support via lsp-mode
-(use-package lsp-mode
-  :ensure t
-  :hook (
-         (lsp-mode . lsp-enable-which-key-integration) ;; enable which-key integration
-         (prog-mode . lsp-deferred))  ;; automatically start 'lsp' for programming
-  :commands (lsp lsp-deferred)
+(use-package eglot
+  :custom (eglot-send-changes-idle-item 0.1)
   :config
-  ;; prefix for lsp-command-keymap
-  (setq lsp-keymap-prefix "C-c l")
-  ;; don't warn for no client found
-  (setq lsp-warn-no-matched-clients nil))
-
-;; UI for lsp-mode via lsp-ui
-(use-package lsp-ui
-  :ensure t
-  :commands lsp-ui-mode)
-
-;; lsp-mode ivy integration
-(use-package lsp-ivy
-    :ensure t
-    :commands lsp-ivy-workspace-symbol)
-
-;; lsp-mode treemacs integration
-;; (use-package lsp-treemacs
-;;   :ensure t
-;;   :config (lsp-treemacs-sync-mode 1))
+  (fset #'jsonrpc--log-event #'ignore))  ;; massive perf boost by skipping events
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Python
 ;; General config for python-mode
 (use-package python
   :delight Python
-
-;; LSP for Python
-(use-package lsp-pyright
-  :ensure t
-  :hook (python-mode . lsp-deferred))
+  :hook ((python-mode . eglot-ensure)
+         (python-mode . eglot-format-bufer)))
 
 ;; (defun python-remove-unused-imports()
 ;;   ;; Removes unused imports and unused variables with autoflake.
@@ -575,10 +549,6 @@
 ;;   :hook (elixir-mode . company-elixir))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Dart
-;; ;; LSP for Dart
-;; (use-package lsp-dart
-;;   :ensure t
-;;   :hook (dart-mode . lsp))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; OCaml
 ;; OCaml support
