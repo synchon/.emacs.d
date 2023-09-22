@@ -506,13 +506,13 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Markdown
 ;; Markdown support
-;; (use-package markdown-mode
-;;   :ensure t
-;;   :mode (("README\\.md\\'" . gfm-mode)
-;;          ("\\.md\\'" . markdown-mode)
-;;          ("\\.markdown\\'" . markdown-mode))
-;;   :config
-;;   (setq markdown-fontify-code-blocks-natively t))
+(use-package markdown-mode
+  :ensure t
+  :mode (("README\\.md\\'" . gfm-mode)
+         ("\\.md\\'" . markdown-mode)
+         ("\\.markdown\\'" . markdown-mode))
+  :config
+  (setq markdown-fontify-code-blocks-natively t))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; YAML
 ;; YAML support
