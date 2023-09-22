@@ -274,6 +274,14 @@
   (completion-styles '(orderless basic))
   (completion-category-overrides '((file (styles basic partial-completion)))))
 
+;; Enhance in-buffer completion with popup
+(use-package corfu
+  :ensure t
+  :init
+  (global-corfu-mode)
+  :custom
+  (corfu-cycle t))       ;; Enable cycling for `corfu-next/previous'
+
   :ensure t
 
   :ensure t
