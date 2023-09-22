@@ -267,11 +267,7 @@
   :init
   (vertico-mode))
 
-;; 'ivy'-enhanced versions of common emacs commands
-(use-package counsel
   :ensure t
-  :bind (("M-x" . counsel-M-x)
-         ("C-x C-f". counsel-find-file)))
 
 ;; 'ivy'-enhanced search alternative to 'isearch'
 (use-package swiper
