@@ -228,17 +228,6 @@
             "Restart Emacs"
             (lambda (&rest _) (restart-emacs)))))))
 
-;; Project management
-(use-package projectile
-  :ensure t
-  :delight
-  :hook (after-init . projectile-mode)
-  :config
-  ;; enable caching for large projects
-  (setq projectile-enable-caching t)
-  ;; use 'ivy' for completion
-  (setq projectile-completion-system 'ivy))
-
 ;; Neotree
 (use-package neotree
   :ensure t
@@ -247,7 +236,6 @@
   :config
   (setq neo-theme (if (display-graphic-p) 'icons 'arrow)            ;; set theme
         neo-smart-open t                                            ;; open current file in neotree
-        projectile-switch-project-action 'neotree-projectile-action ;; integrate with projectile-switch-project
         neo-window-width 40))                                       ;; increase default neotree buffer width
 
 ;; Custom major mode name
@@ -344,12 +332,6 @@
   :ensure t
   :config
   (exec-path-from-shell-initialize))
-
-;; Counsel support for projectile
-(use-package counsel-projectile
-  :ensure t
-  :hook (after-init . counsel-projectile-mode)
-  :bind (("C-c p" . projectile-command-map)))
 
 ;; Walk through git revisions of a file
 (use-package git-timemachine
