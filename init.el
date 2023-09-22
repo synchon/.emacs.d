@@ -259,13 +259,13 @@
          ("C-x C-l" . crux-downcase-region)
          ("C-x M-c" . crux-capitalize-region)))
 
-;; Generic completion framework for 'M-x'
-(use-package ivy
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Superchargers zoom zoom ...
+
+;; Minimalistic vertical completion for `M-x'
+(use-package vertico
   :ensure t
-  :delight
-  :hook (after-init . ivy-mode)
-  :config
-  (setq ivy-initial-inputs-alist nil)) ;; no regex by default
+  :init
+  (vertico-mode))
 
 ;; 'ivy'-enhanced versions of common emacs commands
 (use-package counsel
