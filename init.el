@@ -31,24 +31,11 @@
 
 ;;; Code:
 
-
-(require 'package)
-
-;; Stop second package load and improve startup time
-(setq package-enable-at-startup nil)
-
-;; Add package sources
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
-(add-to-list 'package-archives '("gnu" . "https://elpa.gnu.org/packages/"))
-(package-initialize)
-
-;; Setup 'use-package'
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package))
-
-(eval-when-compile
-  (require 'use-package))
+;; Package and source initialization
+(with-eval-after-load 'package
+  ;; Add package sources
+  (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+  (add-to-list 'package-archives '("gnu" . "https://elpa.gnu.org/packages/") t))
 
 ;; Personal info
 (setq user-full-name "Synchon Mandal"             ;; set full name
