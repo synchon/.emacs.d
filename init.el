@@ -31,13 +31,6 @@
 
 ;;; Code:
 
-;; Make startup faster by reducing the frequency of garbage
-;; collection. The default is 800 kilobytes. Measured in bytes.
-;; This is set at 100 mb
-(setq gc-cons-threshold 100000000)
-
-;; Increase amount of data read from the process to 1 mb
-(setq read-process-output-max (* 1024 1024))
 
 (require 'package)
 
