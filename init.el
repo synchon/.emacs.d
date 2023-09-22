@@ -356,10 +356,6 @@
   :ensure t
   :bind (("C-c C-g" . git-timemachine)))
 
-;; htmlize
-;; (use-package htmlize
-;;   :ensure t)
-
 ;; Open macOS apps
 (use-package counsel-osx-app
   :if (memq window-system '(mac ns))
