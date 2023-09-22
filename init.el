@@ -267,6 +267,13 @@
   :init
   (vertico-mode))
 
+;; Provide completion style (backend for completion) for a frontend UI
+(use-package orderless
+  :ensure t
+  :custom
+  (completion-styles '(orderless basic))
+  (completion-category-overrides '((file (styles basic partial-completion)))))
+
   :ensure t
 
   :ensure t
