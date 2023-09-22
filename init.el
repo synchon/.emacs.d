@@ -522,7 +522,13 @@
   :config
   (add-to-list 'auto-mode-alist '("\\.yml\\'". yaml-mode)))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Text + RST
+;; Text + RST support
+(use-package rst
   :ensure t
+  :mode (("\\.txt\\'" . rst-mode)
+         ("\\.rst\\'" . rst-mode)
+         ("\\.rest\\'" . rst-mode)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; UI
 ;; Theme
