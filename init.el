@@ -203,8 +203,7 @@
         auto-package-update-hide-results t))
 
 ;; Fancy icons
-(use-package all-the-icons
-  :if (display-graphic-p)
+(use-package nerd-icons
   :ensure t)
 
 ;; Dashboard for emacs
@@ -220,11 +219,11 @@
         dashboard-navigator-buttons                     ;; customize navigator buttons
         ;; Format: "(icon title help action face prefix suffix)"
         `(;; line1
-          ((,(all-the-icons-faicon "repeat" :height 1.0 :v-adjust 0.0)
+          ((,(nerd-icons-faicon "nf-fa-repeat" :height 1.0 :v-adjust 0.0)
             "Update"
             "Update packages"
             (lambda (&rest _) (auto-package-update-now)))
-           (,(all-the-icons-faicon "refresh" :height 1.0 :v-adjust 0.0)
+           (,(nerd-icons-faicon "nf-fa-refresh" :height 1.0 :v-adjust 0.0)
             "Restart"
             "Restart Emacs"
             (lambda (&rest _) (restart-emacs)))))))
@@ -639,11 +638,11 @@
   ;; no limit for window width
   (setq doom-modeline-window-width-limit nil)
   ;; display icons if in GUI
-  (setq doom-modeline-icon (display-graphic-p))
+  (setq doom-modeline-icon t)
   ;; display major mode icon if in GUI
-  (setq doom-modeline-major-mode-icon (display-graphic-p))
+  (setq doom-modeline-major-mode-icon t)
   ;; display color icon for major mode if in GUI
-  (setq doom-modeline-major-mode-color-icon (display-graphic-p))
+  (setq doom-modeline-major-mode-color-icon t)
   ;; display buffer name
   (setq doom-modeline-buffer-name t)
   ;; don't display minor mode
