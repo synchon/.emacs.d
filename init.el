@@ -258,11 +258,6 @@
 (use-package eldoc
   :delight)
 
-;; Set window dimensions based on golden ratio
-(use-package golden-ratio
-  :ensure t
-  :hook (after-init . golden-ratio-mode))
-
 ;; Useful functions
 (use-package crux
   :ensure t
