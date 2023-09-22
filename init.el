@@ -394,8 +394,7 @@
 ;;   :hook ((prog-mode . yas-minor-mode)
 ;;          (go-mode . yas-minor-mode))
 ;;   :config
-;;   (yas-reload-all)
-;;   (yas-global-mode))
+;;   (yas-reload-all))
 
 ;; (use-package yasnippet-snippets
 ;;   :ensure t
