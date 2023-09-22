@@ -105,7 +105,16 @@
   ;; :hook ((before-save . delete-trailing-whitespace)
   ;;        (prog-mode . electric-pair-mode)))
   :config
-  (setq auth-sources '("~/.authinfo")))
+  (setq auth-sources '("~/.authinfo"))
+  ;; Prefer tree-sitter enhanced modes
+  (setq major-mode-remap-alist
+        '((yaml-mode . yaml-ts-mode)
+          (bash-mode . bash-ts-mode)
+          (js2-mode . js-ts-mode)
+          (typescript-mode . typescript-ts-mode)
+          (json-mode . json-ts-mode)
+          (css-mode . css-ts-mode)
+          (python-mode . python-ts-mode))))
 
 ;; Display matching parenthesis
 (use-package paren
@@ -425,15 +434,7 @@
 (use-package ein
   :ensure t)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; tree-sitter support for improved parsing and syntax highlighting
-(use-package tree-sitter
-  :ensure t
-  :config
-  (global-tree-sitter-mode))
 
-(use-package tree-sitter-langs
-  :ensure t
-  :after tree-sitter)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; LSP (Language Server Protocol) support
 ;; LSP support via lsp-mode
@@ -468,7 +469,6 @@
 ;; General config for python-mode
 (use-package python
   :delight Python
-  :hook (python-mode . tree-sitter-hl-mode))
 
 ;; LSP for Python
 (use-package lsp-pyright
