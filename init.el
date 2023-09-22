@@ -66,14 +66,16 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; Buffer
-(global-prettify-symbols-mode 1)           ;; prettify symbols like lambda
-(delete-selection-mode 1)                  ;; delete content while typing in marked region
-(global-auto-revert-mode 1)                ;; auto-revert buffer from file on disk
-(global-visual-line-mode 1)                ;; display visual line features like wrapping
+(global-prettify-symbols-mode)           ;; prettify symbols like lambda
+(delete-selection-mode)                  ;; delete content while typing in marked region
+(global-visual-line-mode)                ;; display visual line features like wrapping
+
+(setq-default auto-revert-interval 1       ;; set auto-revert mode check to 1 second
+              auto-revert-check-vc-info t) ;; check VC for auto-revert mode check
+(global-auto-revert-mode)                  ;; auto-revert buffer from file on disk
 
 (setq-default tab-width 2                  ;; use tab width of 2
-              indent-tabs-mode nil         ;; disable indent-tabs-mode
-              tab-always-indent 'complete) ;; complete indent while using tab
+              indent-tabs-mode nil)        ;; disable indent-tabs-mode
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -83,16 +85,11 @@
       scroll-error-top-bottom t        ;; no error while scrolling past the window
       ring-bell-function 'ignore       ;; inhibit bell
       sentence-end-double-space nil    ;; use single space at sentence end
-      confirm-kill-emacs 'y-or-n-p     ;; quitting confirmation
-      )
+      confirm-kill-emacs 'y-or-n-p)    ;; quitting confirmation
 
 (fset 'list-buffers 'ibuffer) ;; use ibuffer
 (fset 'yes-or-no-p 'y-or-n-p) ;; use y/n instead of yes/no
 (setq-default fill-column 88) ;; Restrict to 88 chars/line
-
-;; Hooks
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
-(add-hook 'prog-mode-hook 'electric-pair-mode)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -100,10 +97,16 @@
   :delight
   (visual-line-mode)
   (beacon-mode)
+  :init
+  ;; TAB cycle if there are only few candidates
+  (setq completion-cycle-threshold 3)
+  ;; Enable indentation+completion using the TAB key.
+  ;; `completion-at-point' is often bound to M-TAB.
+  (setq tab-always-indent 'complete)
   :bind (("s-1" . text-scale-increase)
          ("s-2" . text-scale-decrease))
-  ;; :hook ((before-save . delete-trailing-whitespace)
-  ;;        (prog-mode . electric-pair-mode)))
+  :hook ((before-save . delete-trailing-whitespace)
+         (prog-mode . electric-pair-mode))
   :config
   (setq auth-sources '("~/.authinfo"))
   ;; Prefer tree-sitter enhanced modes
