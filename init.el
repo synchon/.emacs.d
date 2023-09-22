@@ -356,12 +356,6 @@
   :ensure t
   :bind (("C-c C-g" . git-timemachine)))
 
-;; Open macOS apps
-(use-package counsel-osx-app
-  :if (memq window-system '(mac ns))
-  :ensure t
-  :bind (("C-x C-o" . counsel-osx-app)))
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Programming
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Utilities
 ;; Improved parenthesis management
