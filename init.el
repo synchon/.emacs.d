@@ -448,57 +448,23 @@
   :hook ((python-mode . eglot-ensure)
          (python-mode . eglot-format-bufer)))
 
-;; (defun python-remove-unused-imports()
-;;   ;; Removes unused imports and unused variables with autoflake.
-;;   (interactive)
-;;   (if (executable-find "autoflake")
-;;       (progn
-;;         (shell-command (format "autoflake --remove-all-unused-imports -i %s"
-;;                                (shell-quote-argument (buffer-file-name))))
-;;         (revert-buffer t t t))
-;;     (warn "python-mode: Cannot find autoflake executable."))))
-
-;; ;; Format code as per black code formatter rules
+;; Format code as per black
 ;; (use-package blacken
 ;;   :ensure t
 ;;   :delight
 ;;   :hook (python-mode . blacken-mode)
 ;;   :custom (blacken-line-length 79))
 
-;; ;; Sort imports as per isort
-;; (use-package py-isort
+;; Sort imports as per isort
+;; (use-package isortify
 ;;   :ensure t
-;;   :after python
-;;   :hook ((python-mode . pyvenv-mode)
-;;          (before-save . py-isort-before-save)))
-
-;; (use-package pyenv-mode
-;;   :after python
-;;   :hook ((python-mode . pyenv-mode)
-;;          (projectile-switch-project . projectile-pyenv-mode-set))
-;;   :custom (pyenv-mode-set "3.8.5")
-;;   :preface
-;;   (defun projectile-pyenv-mode-set ()
-;;     ;; Set pyenv version matching project name.
-;;     (let ((project (projectile-project-name)))
-;;       (if (member project (pyenv-mode-versions))
-;;           (pyenv-mode-set project)
-;;         (pyenv-mode-unset)))))
-
-;; ;; Virtualenv support
-;; (use-package pyvenv
-;;   :ensure t
-;;   :after python
-;;   :hook (python-mode . pyvenv-mode)
-;;   :custom
-;;   (pyvenv-default-virtual-env-name "env")
-;;   (pyvenv-mode-line-indicator '(pyvenv-virtual-env-name ("[venv:"
-;;                                                          pyvenv-virtual-env-name "]"))))
+;;   :delight
+;;   :hook (python-mode . isortify-mode))
 
 ;; Poetry support
-(use-package poetry
-  :ensure t
-  :bind ("C-x p" . poetry))
+;; (use-package poetry
+;;   :ensure t
+;;   :bind ("C-x p" . poetry))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Go
 ;; General config for go-mode
