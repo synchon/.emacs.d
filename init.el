@@ -301,19 +301,6 @@
   :ensure t
   :bind (("C-x o" . ace-window)))
 
-;; In-buffer text auto-completion framework
-(use-package company
-  :ensure t
-  :delight
-  :hook (after-init . global-company-mode)
-  :config
-  (setq company-idle-delay 0.0              ;; displays toolip with a delay of 0.0
-        company-show-quick-access nil       ;; do not show numbers for hints
-        company-tooltip-limit 10            ;; max. result of 10 in tooltip
-        company-minimum-prefix-length 1     ;; requires 1 chars to start auto-completion
-        company-tooltip-align-annotations t ;; align tooltip annotations
-        company-tooltip-flip-when-above t)) ;; flip direction when displayed above
-
 ;; 'company' front-end with icons
 ;; (use-package company-box
 ;;   :ensure t
