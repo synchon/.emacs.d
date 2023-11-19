@@ -455,26 +455,8 @@
 ;; General config for python-mode
 (use-package python
   :delight Python
-  :hook ((python-mode . eglot-ensure)
-         (python-mode . eglot-format-bufer)))
-
-;; Format code as per black
-;; (use-package blacken
-;;   :ensure t
-;;   :delight
-;;   :hook (python-mode . blacken-mode)
-;;   :custom (blacken-line-length 79))
-
-;; Sort imports as per isort
-;; (use-package isortify
-;;   :ensure t
-;;   :delight
-;;   :hook (python-mode . isortify-mode))
-
-;; Poetry support
-;; (use-package poetry
-;;   :ensure t
-;;   :bind ("C-x p" . poetry))
+  :hook ((python-mode . eglot-ensure)          ;; enable LSP
+         (before-save . eglot-format-bufer)))  ;; format buffer via LSP
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Go
 ;; General config for go-mode
