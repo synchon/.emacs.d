@@ -209,21 +209,34 @@
   (dashboard-setup-startup-hook)
   (setq dashboard-startup-banner 'logo                  ;; use logo for banner
         dashboard-projects-backend 'project-el          ;; set project backend
-        dashboard-items '((recents . 5) (projects . 5)) ;; restrict recents and projects to 5
-        dashboard-set-heading-icons t                   ;; show icons
+        dashboard-items '((recents . 5)                 ;; restrict recents to 5
+                          (projects . 5))               ;; restrict projects to 5
+        dashboard-startupify-list '(dashboard-insert-banner
+                                    dashboard-insert-newline
+                                    dashboard-insert-banner-title
+                                    dashboard-insert-newline
+                                    dashboard-insert-navigator
+                                    dashboard-insert-newline
+                                    dashboard-insert-init-info
+                                    dashboard-insert-items
+                                    dashboard-insert-newline
+                                    dashboard-insert-footer)
+        dashboard-display-icons-p t                     ;; display icons on both GUI and terminal
+        dashboard-icon-type 'nerd-icons                 ;; use `nerd-icons' package
         dashboard-set-file-icons t                      ;; show file icons
-        dashboard-set-navigator t                       ;; show navigator
         dashboard-navigator-buttons                     ;; customize navigator buttons
         ;; Format: "(icon title help action face prefix suffix)"
         `(;; line1
-          ((,(nerd-icons-faicon "nf-fa-repeat" :height 1.0 :v-adjust 0.0)
+          ((,(nerd-icons-faicon "nf-fa-repeat" :height 1.1 :v-adjust 0.0)
             "Update"
             "Update packages"
             (lambda (&rest _) (auto-package-update-now)))
-           (,(nerd-icons-faicon "nf-fa-refresh" :height 1.0 :v-adjust 0.0)
+           (,(nerd-icons-faicon "nf-fa-refresh" :height 1.1 :v-adjust 0.0)
             "Restart"
             "Restart Emacs"
-            (lambda (&rest _) (restart-emacs)))))))
+            (lambda (&rest _) (restart-emacs))))
+          )
+        ))
 
 ;; Neotree
 (use-package neotree
