@@ -244,7 +244,7 @@
   :bind (("s-`" . neotree-toggle)                                   ;; bind toggle key
          ("C-a" . move-beginning-of-line))                          ;; respect global config
   :config
-  (setq neo-theme (if (display-graphic-p) 'icons 'arrow)            ;; set theme
+  (setq neo-theme (if (display-graphic-p) 'nerd 'arrow)             ;; set theme
         neo-smart-open t                                            ;; open current file in neotree
         neo-window-width 40))                                       ;; increase default neotree buffer width
 
