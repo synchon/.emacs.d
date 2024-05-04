@@ -491,9 +491,13 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Rust
 ;; Rust support
-;; (use-package rust-mode
-;;   :delight Rust
-;;   :ensure t)
+(use-package rust-mode
+  :ensure t
+  :delight Rust
+  :init
+  (setq rust-mode-treesitter-derive t)         ;; use tree-sitter
+  :hook ((rust-mode . eglot-ensure)            ;; enable LSP
+         (rust-mode . (lambda () (add-hook 'before-save-hook 'rust-format-buffer nil t)))))  ;; run rustfmt before save
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Elixir
 ;; Elixir support
