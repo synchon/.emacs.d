@@ -152,7 +152,7 @@
 
 (use-package dired
   :config
-  ;; dired - reuse current buffer by pressing 'a'
+  ;; dired - reuse current buffer by pressing `a'
 
   ;; always delete and copy recursively
   ;; (setq dired-recursive-deletes 'always)
