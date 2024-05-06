@@ -227,11 +227,15 @@
         dashboard-navigator-buttons                     ;; customize navigator buttons
         ;; Format: "(icon title help action face prefix suffix)"
         `(;; line1
-          ((,(nerd-icons-faicon "nf-fa-repeat" :height 1.1 :v-adjust 0.0)
+          ((,(nerd-icons-mdicon "nf-md-file_edit")
+            "init.el"
+            "Open init.el"
+            (lambda (&rest _) (crux-find-user-init-file)))
+           (,(nerd-icons-mdicon "nf-md-update")
             "Update"
             "Update packages"
             (lambda (&rest _) (auto-package-update-now)))
-           (,(nerd-icons-faicon "nf-fa-refresh" :height 1.1 :v-adjust 0.0)
+           (,(nerd-icons-mdicon "nf-md-restart")
             "Restart"
             "Restart Emacs"
             (lambda (&rest _) (restart-emacs))))
