@@ -537,6 +537,8 @@
   :mode (("README\\.md\\'" . gfm-mode)
          ("\\.md\\'" . markdown-mode)
          ("\\.markdown\\'" . markdown-mode))
+  :hook ((gfm-mode . eglot-ensure)
+         (markdown-mode . eglot-ensure))
   :config
   (setq markdown-fontify-code-blocks-natively t))
 
@@ -544,7 +546,8 @@
 ;; YAML support
 (use-package yaml-mode
   :ensure t
-  :hook (yaml-mode . (lambda () (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
+  :hook ((yaml-mode . (lambda () (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
+         (yaml-mode . eglot-ensure))
   :config
   (add-to-list 'auto-mode-alist '("\\.yml\\'". yaml-mode)))
 
@@ -554,7 +557,8 @@
   :ensure t
   :mode (("\\.txt\\'" . rst-mode)
          ("\\.rst\\'" . rst-mode)
-         ("\\.rest\\'" . rst-mode)))
+         ("\\.rest\\'" . rst-mode))
+  :hook (rst-mode . eglot-ensure))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; UI
 ;; Theme
