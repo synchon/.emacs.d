@@ -406,6 +406,17 @@
   :ensure t
   :bind (("C-c C-g" . git-timemachine)))
 
+;; LLM support via ollama
+(use-package gptel
+  :if (executable-find "ollama")
+  :ensure t
+  :config
+  (setq gptel-model 'granite3.2:2b
+        gptel-backend (gptel-make-ollama "Ollama"
+                                         :host "localhost:11434"
+                                         :stream t
+                                         :models '(granite3.2:2b))))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Programming
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Utilities
 ;; Improved parenthesis management
