@@ -393,9 +393,9 @@
   :bind (("C-z" . undo)
          ("C-S-z" . redo)))
 
-;; macOS fix for reading $PATH
+;; Fix for reading $PATH
 (use-package exec-path-from-shell
-  :if (memq window-system '(mac ns))
+  :if (memq window-system '(mac ns x))
   :ensure t
   :config
   (exec-path-from-shell-initialize))
