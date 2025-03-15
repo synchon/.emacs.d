@@ -117,7 +117,8 @@
           (typescript-mode . typescript-ts-mode)
           (json-mode . json-ts-mode)
           (css-mode . css-ts-mode)
-          (python-mode . python-ts-mode))))
+          (python-mode . python-ts-mode)
+          (rust-mode . rust-ts-mode))))
 
 ;; Display matching parenthesis
 (use-package paren
