@@ -464,6 +464,12 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; LSP (Language Server Protocol) support
 (use-package eglot
+  :bind
+  (:map eglot-mode-map
+        ("C-c a". eglot-code-actions)
+        ("C-c d" . eldoc)
+        ("C-c f" . eglot-format-buffer)
+        ("C-c r" . eglot-rename))
   :custom (eglot-send-changes-idle-item 0.1)
   :config
   (fset #'jsonrpc--log-event #'ignore))  ;; massive perf boost by skipping events
