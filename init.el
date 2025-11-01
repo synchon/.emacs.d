@@ -588,30 +588,13 @@
   :ensure t)
 
 ;; Enhanced modeline UI
-(use-package doom-modeline
+(use-package mood-line
   :ensure t
-  :init (doom-modeline-mode 1)
   :config
-  ;; set modeline height
-  (setq doom-modeline-height 30)
-  ;; use hud unstead of default bar
-  (setq doom-modeline-hud t)
-  ;; no limit for window width
-  (setq doom-modeline-window-width-limit nil)
-  ;; display icons if in GUI
-  (setq doom-modeline-icon t)
-  ;; display major mode icon if in GUI
-  (setq doom-modeline-major-mode-icon t)
-  ;; display color icon for major mode if in GUI
-  (setq doom-modeline-major-mode-color-icon t)
-  ;; display buffer name
-  (setq doom-modeline-buffer-name t)
-  ;; don't display minor mode
-  (setq doom-modeline-minor-modes nil)
-  ;; display LSP state
-  (setq doom-modeline-lsp t)
-  ;; display GitHub notificatons
-  (setq doom-modeline-github t))
+  (mood-line-mode)
+  :custom
+  (setq mood-line-format mood-line-format-default-extended)
+  (setq mood-line-glyph-alist mood-line-glyphs-unicode))
 
 ;; Distinguish between file-visiting windows and other windows
 (use-package solaire-mode
