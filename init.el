@@ -410,11 +410,11 @@
   :if (executable-find "ollama")
   :ensure t
   :config
-  (setq gptel-model 'granite3.2:2b
+  (setq gptel-model 'qwen3:1.7b
         gptel-backend (gptel-make-ollama "Ollama"
                                          :host "localhost:11434"
                                          :stream t
-                                         :models '(granite3.2:2b))))
+                                         :models '(granite3.2:2b qwen3:1.7b))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Programming
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Utilities
