@@ -494,8 +494,8 @@
 ;; General config for python-mode
 (use-package python
   :delight Python
-  :hook ((python-mode . eglot-ensure)          ;; enable LSP
-         (before-save . eglot-format-bufer)))  ;; format buffer via LSP
+  :hook ((python-mode . eglot-ensure) ;; enable LSP
+         (python-ts-mode . eglot-ensure))) ;; enable LSP
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Go
 ;; General config for go-mode
