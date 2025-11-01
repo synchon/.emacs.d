@@ -483,7 +483,12 @@
         ("C-c r" . eglot-rename))
   :custom (eglot-send-changes-idle-item 0.1)
   :config
-  (fset #'jsonrpc--log-event #'ignore))  ;; massive perf boost by skipping events
+  (fset #'jsonrpc--log-event #'ignore)  ;; massive perf boost by skipping events
+  (add-to-list 'eglot-server-programs
+               `(python-mode . ,(eglot-alternatives
+                                 '(("zuban" "server")
+                                   ("pyrefly" "lsp")
+                                   ("ty" "server"))))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Python
 ;; General config for python-mode
