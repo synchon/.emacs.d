@@ -173,6 +173,10 @@
   ;; use `ultra' mode for aspell
   (setq ispell-extra-args '("--sug-mode=ultra" "--camel-case" "--master=en" "--lang=GB")))
 
+(use-package flymake
+  :config
+  (setq flymake-show-diagnostics-at-end-of-line t))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Org-mode
 ;; Org-mode customizations
 ;; (use-package org
