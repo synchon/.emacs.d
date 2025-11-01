@@ -477,7 +477,7 @@
 (use-package eglot
   :bind
   (:map eglot-mode-map
-        ("C-c a". eglot-code-actions)
+        ("C-c a" . eglot-code-actions)
         ("C-c d" . eldoc)
         ("C-c f" . eglot-format-buffer)
         ("C-c r" . eglot-rename))
