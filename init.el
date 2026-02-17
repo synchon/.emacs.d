@@ -512,6 +512,10 @@
   :hook ((go-mode . eglot-ensure)             ;; enable LSP
          (before-save . gofmt-before-save)))  ;; run gofmt before save
 
+;; golangci-lint support via flycheck
+(use-package flycheck-golangci-lint
+  :ensure t
+  :hook (go-mode . flycheck-golangci-lint-setup))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Rust
 ;; Rust support
