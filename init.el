@@ -573,13 +573,6 @@
   (setq mood-line-format mood-line-format-default-extended)
   (setq mood-line-glyph-alist mood-line-glyphs-unicode))
 
-;; Temporarily highlight changes from yanking, etc.
-(use-package volatile-highlights
-  :ensure t
-  :delight
-  :config
-  (volatile-highlights-mode t))
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Utilities
 ;; Syntax checker
 (use-package flycheck
