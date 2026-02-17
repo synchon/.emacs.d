@@ -1,6 +1,6 @@
 ;;; init.el --- Configuration file for Emacs >= 29.1  ;; -*- lexical-binding: t -*-
 ;;
-;; Copyright (c) 2018-2025 Synchon Mandal
+;; Copyright (c) 2018-2026 Synchon Mandal
 ;;
 ;; Author: Synchon Mandal <synchon@protonmail.com>
 ;; URL: https://github.com/synchon/emacs.d
