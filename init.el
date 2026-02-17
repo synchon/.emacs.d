@@ -527,21 +527,6 @@
   :hook ((rust-mode . eglot-ensure)            ;; enable LSP
          (rust-mode . (lambda () (add-hook 'before-save-hook 'rust-format-buffer nil t)))))  ;; run rustfmt before save
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Elixir
-;; Elixir support
-;; (use-package elixir-mode
-;;   :ensure t)
-;; :hook (elixir-mode . (lambda ()(add-hook 'before-save-hook 'elixir-format nil t))))
-
-;; Elixir tooling integration
-;; (use-package alchemist
-;;   :ensure t)
-
-;; ;; Elixir backend for company
-;; (use-package company-elixir
-;;   :ensure t
-;;   :hook (elixir-mode . company-elixir))
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Dart
 ;; Dart support
 (use-package dart-mode
