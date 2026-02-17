@@ -573,11 +573,6 @@
   (setq mood-line-format mood-line-format-default-extended)
   (setq mood-line-glyph-alist mood-line-glyphs-unicode))
 
-;; Distinguish between file-visiting windows and other windows
-(use-package solaire-mode
-  :ensure t
-  :hook (after-init . solaire-global-mode))
-
 ;; Use tabs for active buffers
 ;; (use-package awesome-tab
 ;;   :ensure t
