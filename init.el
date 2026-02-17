@@ -52,7 +52,6 @@
 (scroll-bar-mode -1 )                    ;; no scroll bar
 (global-display-line-numbers-mode 1)     ;; line numbers
 (blink-cursor-mode -1)                   ;; no blinking cursor
-(pixel-scroll-precision-mode)            ;; smooth scrolling
 (set-frame-font "Iosevka Extended 15")   ;; font
 (load-theme 'modus-vivendi-tinted)       ;; theme
 
@@ -190,6 +189,12 @@
 ;;   :hook (org-mode . org-bullets-mode))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; General utilities
+;; Scrolling booster
+(use-package ultra-scroll
+  :ensure t
+  :config
+  (ultra-scroll-mode 1))
+
 ;; Restart Emacs from within Emacs
 (use-package restart-emacs
   :ensure t)
