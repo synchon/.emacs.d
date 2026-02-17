@@ -512,15 +512,6 @@
   :hook ((go-mode . eglot-ensure)             ;; enable LSP
          (before-save . gofmt-before-save)))  ;; run gofmt before save
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Haskell
-;; Haskell support
-;; (use-package haskell-mode
-;;   :ensure t
-;;   :hook ((subword-mode interactive-haskell-mode haskell-doc-mode) . haskell-mode))
-;; :config
-;; (add-hook 'haskell-mode-hook #'subword-mode)
-;; (add-hook 'haskell-mode-hook #'interactive-haskell-mode)
-;; (add-hook 'haskell-mode-hook #'haskell-doc-mode))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Rust
 ;; Rust support
