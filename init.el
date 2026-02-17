@@ -573,12 +573,6 @@
   (setq mood-line-format mood-line-format-default-extended)
   (setq mood-line-glyph-alist mood-line-glyphs-unicode))
 
-;; Use tabs for active buffers
-;; (use-package awesome-tab
-;;   :ensure t
-;;   :config
-;;   (awesome-tab-mode t))
-
 ;; Temporarily highlight changes from yanking, etc.
 (use-package volatile-highlights
   :ensure t
