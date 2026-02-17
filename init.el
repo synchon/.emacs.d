@@ -97,7 +97,6 @@
 (use-package emacs
   :delight
   (visual-line-mode)
-  (beacon-mode)
   :init
   ;; TAB cycle if there are only few candidates
   (setq completion-cycle-threshold 3)
@@ -607,12 +606,6 @@
 ;;   :ensure t
 ;;   :config
 ;;   (awesome-tab-mode t))
-
-;; Finding cursor made easy
-(use-package beacon
-  :ensure t
-  :delight
-  :hook (after-init . beacon-mode))
 
 ;; Temporarily highlight changes from yanking, etc.
 (use-package volatile-highlights
