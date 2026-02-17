@@ -533,12 +533,6 @@
   :ensure t
   :delight Dart)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; OCaml
-;; OCaml support
-;; (use-package tuareg
-;;   :delight OCaml
-;;   :ensure t)
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Markdown
 ;; Markdown support
 (use-package markdown-mode
