@@ -494,7 +494,8 @@
                `(python-mode . ,(eglot-alternatives
                                  '(("zuban" "server")
                                    ("pyrefly" "lsp")
-                                   ("ty" "server"))))))
+                                   ("ty" "server"))))
+               `(markdown-mode . ("harper-ls" "--stdio"))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Python
 ;; General config for python-mode
