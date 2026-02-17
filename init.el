@@ -214,6 +214,7 @@
 ;; Dashboard for emacs
 (use-package dashboard
   :ensure t
+  :after nerd-icons
   :config
   (dashboard-setup-startup-hook)
   (setq dashboard-startup-banner 'logo                  ;; use logo for banner
@@ -254,6 +255,7 @@
 ;; Neotree
 (use-package neotree
   :ensure t
+  :after nerd-icons
   :bind (("s-`" . neotree-toggle)                                   ;; bind toggle key
          ("C-a" . move-beginning-of-line))                          ;; respect global config
   :config
@@ -319,7 +321,7 @@
 ;; Enable fonts with rich annotations via `marginalia'
 (use-package nerd-icons-completion
   :ensure t
-  :after marginalia
+  :after (nerd-icons marginalia)
   :hook (marginalia-mode . nerd-icons-completion-marginalia-setup)
   :config
   (nerd-icons-completion-mode))
