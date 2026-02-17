@@ -54,6 +54,7 @@
 (blink-cursor-mode -1)                   ;; no blinking cursor
 (pixel-scroll-precision-mode)            ;; smooth scrolling
 (set-frame-font "Iosevka Extended 15")   ;; font
+(load-theme 'modus-vivendi-tinted)       ;; theme
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -587,10 +588,6 @@
   :hook (rst-mode . eglot-ensure))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; UI
-;; Theme
-(use-package color-theme-sanityinc-tomorrow
-  :ensure t)
-
 ;; Enhanced modeline UI
 (use-package mood-line
   :ensure t
